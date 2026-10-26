@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Decorative sketch map placeholder</title>
+  <desc id="desc">An illustrated, non-geographic map with winding roads, green fields, and a star marking a sample wedding venue.</desc>
+  <rect width="760" height="420" fill="#b7e8c7"/>
+  <path d="M-10 80 Q80 12 170 71 T352 80 T550 44 T780 92 L780 0 L0 0Z" fill="#8bc69d"/>
+  <path d="M-10 315 Q105 246 208 310 T391 300 T560 340 T780 282 V430H0Z" fill="#d9caff"/>
+  <path d="M-20 210 C105 161 155 248 240 208 S391 119 475 177 S617 250 790 170" fill="none" stroke="#fff8eb" stroke-width="35" stroke-linecap="round"/>
+  <path d="M-20 210 C105 161 155 248 240 208 S391 119 475 177 S617 250 790 170" fill="none" stroke="#1d2331" stroke-width="3" stroke-dasharray="10 12" stroke-linecap="round"/>
+  <path d="M220 -10 C210 74 304 125 294 208 S254 318 320 430" fill="none" stroke="#fff8eb" stroke-width="26" stroke-linecap="round"/>
+  <path d="M220 -10 C210 74 304 125 294 208 S254 318 320 430" fill="none" stroke="#1d2331" stroke-width="3" stroke-dasharray="8 12" stroke-linecap="round"/>
+  <path d="M519 15 Q497 62 527 100 T511 162" fill="none" stroke="#6ea6ce" stroke-width="15"/>
+  <g transform="translate(477 100)" stroke="#1d2331" stroke-width="4" stroke-linejoin="round">
+    <path d="M0 -50 L13 -14 L50 0 L13 13 L0 50 L-13 13 L-50 0 L-13 -14Z" fill="#ff705a"/>
+    <circle cx="0" cy="0" r="10" fill="#f6e94b"/>
+  </g>
+  <g fill="#1d2331" font-family="Trebuchet MS, Arial, sans-serif" font-weight="900" font-size="18">
+    <text x="525" y="108" transform="rotate(4 525 108)">THE MEADOW HOUSE</text>
+    <text x="45" y="142" transform="rotate(-6 45 142)">SOUTH DOWNS</text>
+    <text x="428" y="367" transform="rotate(4 428 367)">A LITTLE WAY OUT OF TOWN</text>
+  </g>
+  <g fill="#f6e94b" stroke="#1d2331" stroke-width="3">
+    <circle cx="99" cy="322" r="10"/><circle cx="637" cy="268" r="10"/><circle cx="354" cy="55" r="10"/>
+  </g>
+  <g fill="none" stroke="#1d2331" stroke-width="4" stroke-linecap="round">
+    <path d="M55 50 q14 -10 23 4 M630 61 l8 -14 l9 14 M682 351 l10 -8 l8 9"/>
+  </g>
+</svg>

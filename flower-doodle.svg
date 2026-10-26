@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title">
+  <title id="title">Hand-drawn flower doodle</title>
+  <g stroke="#1d2331" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M91 96 Q80 124 68 158" fill="none"/>
+    <path d="M81 123 Q48 106 42 130 Q59 150 81 123Z" fill="#b7e8c7"/>
+    <path d="M80 144 Q105 118 120 140 Q109 158 80 144Z" fill="#b7e8c7"/>
+    <ellipse cx="90" cy="47" rx="17" ry="31" fill="#ff705a" transform="rotate(0 90 47)"/>
+    <ellipse cx="90" cy="47" rx="17" ry="31" fill="#ff705a" transform="rotate(60 90 76)"/>
+    <ellipse cx="90" cy="47" rx="17" ry="31" fill="#ff705a" transform="rotate(120 90 76)"/>
+    <ellipse cx="90" cy="47" rx="17" ry="31" fill="#ff705a" transform="rotate(180 90 76)"/>
+    <ellipse cx="90" cy="47" rx="17" ry="31" fill="#ff705a" transform="rotate(240 90 76)"/>
+    <ellipse cx="90" cy="47" rx="17" ry="31" fill="#ff705a" transform="rotate(300 90 76)"/>
+    <circle cx="90" cy="76" r="20" fill="#f6e94b"/>
+    <path d="M30 34 l-9 -10 M37 19 l-2 -13 M145 47 l12 -8 M147 62 l15 3" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">Illustrated wedding-day snapshot</title>
+  <desc id="desc">Two joyful people standing together in front of a sunny garden, in a cut-paper editorial illustration style.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#d9caff"/><stop offset="1" stop-color="#ffe8cb"/></linearGradient>
+    <pattern id="grain" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r="1" fill="#1d2331" opacity=".12"/><circle cx="19" cy="20" r=".8" fill="#1d2331" opacity=".1"/></pattern>
+  </defs>
+  <rect width="720" height="900" fill="url(#sky)"/>
+  <circle cx="557" cy="143" r="78" fill="#f6e94b" stroke="#1d2331" stroke-width="5"/>
+  <path d="M0 545 Q110 455 216 526 T450 502 T720 528 V900 H0Z" fill="#b7e8c7"/>
+  <path d="M0 660 Q165 580 321 676 T720 635 V900 H0Z" fill="#719b69"/>
+  <path d="M72 900 C110 750 108 671 81 602 C150 608 194 658 194 742 C242 641 279 605 330 606 C310 710 251 788 228 900Z" fill="#315c4f"/>
+  <path d="M541 900 C521 784 556 670 625 621 C659 687 649 764 620 815 C675 796 704 799 720 813 V900Z" fill="#315c4f"/>
+  <!-- person one -->
+  <ellipse cx="267" cy="354" rx="73" ry="83" fill="#c47f58" stroke="#1d2331" stroke-width="5"/>
+  <path d="M197 340 Q183 270 242 255 Q305 234 336 292 L333 346 Q301 311 270 303 Q231 327 197 340Z" fill="#352b2a" stroke="#1d2331" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M231 370 Q264 394 299 368" fill="none" stroke="#1d2331" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="243" cy="350" r="5" fill="#1d2331"/><circle cx="292" cy="350" r="5" fill="#1d2331"/>
+  <path d="M226 422 L313 421 L340 472 L345 667 L199 667 L201 472Z" fill="#fff8eb" stroke="#1d2331" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M226 423 Q268 466 313 421 L333 453 L291 507 L250 505 L206 454Z" fill="#ff705a" stroke="#1d2331" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M218 508 L196 682 M318 512 L351 690" stroke="#1d2331" stroke-width="5" stroke-linecap="round"/>
+  <path d="M224 668 L201 852 L250 852 L276 670 M301 668 L311 852 L359 852 L339 669" fill="#3158ff" stroke="#1d2331" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M196 852 Q224 839 253 852 L253 873 L184 873Z M309 852 Q339 841 368 852 L372 874 L307 874Z" fill="#fff8eb" stroke="#1d2331" stroke-width="5"/>
+  <!-- person two -->
+  <ellipse cx="448" cy="351" rx="70" ry="81" fill="#f0ba89" stroke="#1d2331" stroke-width="5"/>
+  <path d="M380 345 Q365 276 427 254 Q495 230 520 292 L517 346 Q484 316 452 302 Q418 328 380 345Z" fill="#8e5336" stroke="#1d2331" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="425" cy="349" r="5" fill="#1d2331"/><circle cx="472" cy="349" r="5" fill="#1d2331"/>
+  <path d="M412 369 Q448 394 482 368" fill="none" stroke="#1d2331" stroke-width="5" stroke-linecap="round"/>
+  <path d="M400 419 Q448 444 495 419 L540 514 L556 686 L356 686 L366 514Z" fill="#3158ff" stroke="#1d2331" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M401 419 L448 468 L495 419 L510 451 L470 522 L430 522 L387 451Z" fill="#fff8eb" stroke="#1d2331" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M399 686 L380 851 L426 851 L448 687 L480 851 L526 851 L515 685" fill="#f6e94b" stroke="#1d2331" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M377 851 Q401 839 428 851 L430 874 L366 874Z M480 851 Q509 839 532 851 L540 874 L478 874Z" fill="#fff8eb" stroke="#1d2331" stroke-width="5"/>
+  <!-- hands and little garden bits -->
+  <path d="M337 512 Q352 541 378 551" fill="none" stroke="#1d2331" stroke-width="15" stroke-linecap="round"/>
+  <path d="M355 543 Q370 555 383 547" fill="none" stroke="#c47f58" stroke-width="13" stroke-linecap="round"/>
+  <path d="M93 253 Q111 227 132 251 Q145 218 172 238 Q186 264 158 280 Q139 302 117 279 Q89 289 93 253Z" fill="#ff705a" stroke="#1d2331" stroke-width="4"/>
+  <path d="M585 425 Q609 396 632 424 Q654 405 671 429 Q677 457 645 463 Q619 482 601 458 Q577 455 585 425Z" fill="#f6e94b" stroke="#1d2331" stroke-width="4"/>
+  <path d="M0 0H720V900H0Z" fill="url(#grain)"/>
+</svg>

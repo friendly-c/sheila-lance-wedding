@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 150" role="img" aria-labelledby="title">
+  <title id="title">Two sketchy wedding rings</title>
+  <g stroke="#1d2331" stroke-width="5" stroke-linejoin="round">
+    <ellipse cx="68" cy="79" rx="43" ry="32" fill="none" transform="rotate(-20 68 79)"/>
+    <ellipse cx="109" cy="76" rx="43" ry="32" fill="none" transform="rotate(18 109 76)"/>
+    <path d="M31 65 Q66 39 98 73" fill="none" stroke="#f6b900" stroke-width="8"/>
+    <path d="M73 104 Q109 128 143 91" fill="none" stroke="#ff705a" stroke-width="8"/>
+    <path d="M20 30 l-9 -10 M151 24 l8 -10 M154 119 l13 2" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

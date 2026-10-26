@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title">
+  <title id="title">Playful sun doodle</title>
+  <g stroke="#1d2331" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M80 4 L88 27 L107 11 L107 34 L133 29 L126 52 L151 61 L132 76 L153 97 L128 102 L136 127 L111 119 L103 151 L84 132 L68 155 L61 130 L33 138 L40 111 L13 104 L32 85 L9 67 L38 59 L32 34 L57 42 L67 15Z" fill="#f6e94b"/>
+    <circle cx="81" cy="80" r="35" fill="#ff705a"/>
+    <path d="M62 80 Q72 94 84 81 Q94 93 103 78" fill="none"/>
+    <circle cx="68" cy="70" r="3" fill="#1d2331"/><circle cx="94" cy="70" r="3" fill="#1d2331"/>
+  </g>
+</svg>
