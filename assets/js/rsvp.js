@@ -73,12 +73,22 @@ async function initRsvp(pageRoot) {
   }
 
   const invitation = result.invitation;
+  const invitationType = String(invitation.invitationType || "FULL_DAY").trim().toUpperCase();
+  const eveningOnly = invitationType === "EVENING_ONLY";
   content.hidden = false;
   pageRoot.querySelector("[data-party-name]").textContent = invitation.partyName;
   pageRoot.querySelector("[data-party-count]").textContent = invitation.guests.length === 1
     ? "1 guest invited"
     : `${invitation.guests.length} guests invited`;
   note.textContent = invitation.note;
+  const instructions = pageRoot.querySelector("[data-rsvp-instructions]");
+  if (instructions) {
+    instructions.textContent = eveningOnly
+      ? "Please let us know whether each person can join us for the evening celebration. This invitation doesn't require meal choices."
+      : "Can you make it? Let us know for everyone listed below. If you're joining us for the full day, choose a starter, main course and dessert.";
+  }
+  const dietaryLabel = pageRoot.querySelector('label[for="dietary-notes"]');
+  if (dietaryLabel && eveningOnly) dietaryLabel.textContent = "Any dietary notes or a note for us (optional)";
 
   if (result.submitted) {
     form.hidden = true;
@@ -99,7 +109,7 @@ async function initRsvp(pageRoot) {
       : FALLBACK_MEALS,
   );
   invitation.guests.forEach((guest) => {
-    guestList.appendChild(makeGuestFields(guest, mealOptions));
+    guestList.appendChild(makeGuestFields(guest, mealOptions, eveningOnly));
   });
 
   form.addEventListener("change", (event) => {
@@ -126,16 +136,19 @@ async function initRsvp(pageRoot) {
     const attendees = invitation.guests.map((guest) => {
       const selected = form.querySelector(`input[name="attendance-${cssEscape(guest.id)}"]:checked`);
       const attending = selected?.value === "yes";
-      const meals = {};
-      COURSES.forEach(({ key }) => {
-        const select = form.querySelector(`[name="${key}-${cssEscape(guest.id)}"]`);
-        meals[key] = attending ? (select?.value || "") : "";
-      });
+      let meals = null;
+      if (!eveningOnly && attending) {
+        meals = {};
+        COURSES.forEach(({ key }) => {
+          const select = form.querySelector(`[name="${key}-${cssEscape(guest.id)}"]`);
+          meals[key] = select?.value || "";
+        });
+      }
       return {
         guestId: guest.id,
         name: guest.name,
         attending,
-        meals: attending ? meals : null,
+        meals,
       };
     });
 
@@ -192,7 +205,7 @@ function normaliseMealOptions(meals) {
   return grouped;
 }
 
-function makeGuestFields(guest, mealOptions) {
+function makeGuestFields(guest, mealOptions, eveningOnly) {
   const row = document.createElement("fieldset");
   row.className = "guest-rsvp-card";
   row.dataset.guestRow = "";
@@ -230,47 +243,49 @@ function makeGuestFields(guest, mealOptions) {
   });
   row.appendChild(attendanceGroup);
 
-  const mealField = document.createElement("div");
-  mealField.className = "guest-meal-fields";
-  mealField.dataset.mealField = "";
-  mealField.hidden = true;
+  if (!eveningOnly) {
+    const mealField = document.createElement("div");
+    mealField.className = "guest-meal-fields";
+    mealField.dataset.mealField = "";
+    mealField.hidden = true;
 
-  COURSES.forEach(({ key, label: courseLabel }) => {
-    const field = document.createElement("div");
-    field.className = "field meal-course-field";
-    const selectId = `${key}-${guest.id}`;
-    const label = document.createElement("label");
-    label.className = "field-label";
-    label.htmlFor = selectId;
-    label.textContent = courseLabel;
+    COURSES.forEach(({ key, label: courseLabel }) => {
+      const field = document.createElement("div");
+      field.className = "field meal-course-field";
+      const selectId = `${key}-${guest.id}`;
+      const label = document.createElement("label");
+      label.className = "field-label";
+      label.htmlFor = selectId;
+      label.textContent = courseLabel;
 
-    const select = document.createElement("select");
-    select.id = selectId;
-    select.name = selectId;
-    select.dataset.mealCourse = key;
-    select.required = false;
-    const placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.textContent = "Choose an option";
-    select.appendChild(placeholder);
+      const select = document.createElement("select");
+      select.id = selectId;
+      select.name = selectId;
+      select.dataset.mealCourse = key;
+      select.required = false;
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Choose an option";
+      select.appendChild(placeholder);
 
-    mealOptions[key].forEach((meal) => {
-      const option = document.createElement("option");
-      option.value = meal.code;
-      option.textContent = meal.label;
-      select.appendChild(option);
+      mealOptions[key].forEach((meal) => {
+        const option = document.createElement("option");
+        option.value = meal.code;
+        option.textContent = meal.label;
+        select.appendChild(option);
+      });
+      if (!mealOptions[key].length) {
+        select.disabled = true;
+        const unavailable = document.createElement("option");
+        unavailable.value = "";
+        unavailable.textContent = "Options not yet available";
+        select.appendChild(unavailable);
+      }
+      field.append(label, select);
+      mealField.appendChild(field);
     });
-    if (!mealOptions[key].length) {
-      select.disabled = true;
-      const unavailable = document.createElement("option");
-      unavailable.value = "";
-      unavailable.textContent = "Options not yet available";
-      select.appendChild(unavailable);
-    }
-    field.append(label, select);
-    mealField.appendChild(field);
-  });
-  row.appendChild(mealField);
+    row.appendChild(mealField);
+  }
   return row;
 }
 
