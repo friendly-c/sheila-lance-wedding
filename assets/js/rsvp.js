@@ -1,7 +1,13 @@
-import { loadInvitation, submitRsvp } from "./rsvp-adapter.js";
+import { isMockMode, loadInvitation, submitRsvp } from "./rsvp-adapter.js";
 
 const page = document.querySelector("[data-rsvp-page]");
 if (page) initRsvp(page);
+
+const FALLBACK_MEALS = [
+  { code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
+  { code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
+  { code: "fish", label: "Herb-baked fish, buttery new potatoes" },
+];
 
 async function initRsvp(pageRoot) {
   const params = new URLSearchParams(window.location.search);
@@ -16,14 +22,44 @@ async function initRsvp(pageRoot) {
   const submitButton = pageRoot.querySelector("[data-rsvp-submit]");
   const status = pageRoot.querySelector("[data-rsvp-status]");
 
-  const result = await loadInvitation(token);
+  pageRoot.querySelectorAll("[data-rsvp-demo-only]").forEach((element) => {
+    element.hidden = !isMockMode;
+  });
+  const modeHint = pageRoot.querySelector("[data-rsvp-mode-hint]");
+  if (modeHint) {
+    modeHint.textContent = isMockMode
+      ? "Demo only. Your response will not be sent to the couple."
+      : "Your response is sent securely to the couple's private RSVP spreadsheet.";
+  }
+  const dietaryHint = pageRoot.querySelector("[data-dietary-hint]");
+  if (dietaryHint) {
+    dietaryHint.textContent = isMockMode
+      ? "This prototype stores notes only in this browser."
+      : "Please share only information needed for catering or accessibility.";
+  }
+
+  let result;
+  try {
+    result = await loadInvitation(token);
+  } catch {
+    result = { ok: false, reason: "unavailable" };
+  }
   loading.hidden = true;
 
   if (!result.ok) {
     error.hidden = false;
-    pageRoot.querySelector("[data-invalid-token]").textContent = token
-      ? "That invitation link doesn't match one of our demo invitations. Check the URL or try a sample link below."
-      : "This page needs your personal invitation link. For this prototype, choose a sample invitation below.";
+    const invalidCopy = pageRoot.querySelector("[data-invalid-token]");
+    if (result.reason === "unavailable") {
+      invalidCopy.textContent = "We couldn't reach the RSVP service just now. Please check your connection and try refreshing this page in a moment.";
+    } else if (result.reason === "setup-error") {
+      invalidCopy.textContent = "This invitation needs attention from the couple. Please contact them directly so they can check your guest list.";
+    } else {
+      invalidCopy.textContent = token
+        ? "That invitation link doesn't match an active invitation. Check the full link or contact the couple for help."
+        : isMockMode
+          ? "This page needs a personal invitation link. For this prototype, choose one of the sample invitations below."
+          : "This page needs your personal invitation link. Please open the unique link sent to you by the couple.";
+    }
     return;
   }
 
@@ -38,15 +74,21 @@ async function initRsvp(pageRoot) {
   if (result.submitted) {
     form.hidden = true;
     submittedPanel.hidden = false;
-    submittedPanel.querySelector("[data-confirmation-copy]").textContent =
-      "We already have a response saved for this demo invitation on this browser. Your RSVP is locked after submission.";
+    submittedPanel.querySelector("[data-confirmation-copy]").textContent = isMockMode
+      ? "We already have a response saved for this demo invitation on this browser. Your RSVP is locked after submission."
+      : "We already have your RSVP. The couple's spreadsheet has recorded this invitation, and it is locked after submission.";
     const reference = result.savedResponse?.reference;
     if (reference) submittedPanel.querySelector("[data-reference]").textContent = reference;
+    const referenceLabel = submittedPanel.querySelector("[data-reference-label]");
+    if (referenceLabel) referenceLabel.textContent = isMockMode ? "Demo reference" : "Confirmation reference";
     return;
   }
 
+  const mealOptions = Array.isArray(invitation.mealOptions) && invitation.mealOptions.length
+    ? invitation.mealOptions
+    : FALLBACK_MEALS;
   invitation.guests.forEach((guest, index) => {
-    guestList.appendChild(makeGuestFields(guest, index));
+    guestList.appendChild(makeGuestFields(guest, index, mealOptions));
   });
 
   form.addEventListener("change", (event) => {
@@ -66,6 +108,7 @@ async function initRsvp(pageRoot) {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     status.textContent = "";
+    status.classList.remove("form-error");
     if (!form.reportValidity()) return;
 
     const attendees = invitation.guests.map((guest) => {
@@ -82,30 +125,46 @@ async function initRsvp(pageRoot) {
     const dietaryNotes = form.querySelector("[name='dietary-notes']").value.trim();
     const payload = { attendees, dietaryNotes };
     submitButton.disabled = true;
-    submitButton.textContent = "Saving your RSVP…";
+    submitButton.textContent = isMockMode ? "Saving your demo RSVP…" : "Sending your RSVP…";
 
-    const response = await submitRsvp(token, payload);
+    let response;
+    try {
+      response = await submitRsvp(token, payload);
+    } catch {
+      response = { ok: false, reason: "unavailable" };
+    }
     if (!response.ok) {
       submitButton.disabled = false;
-      submitButton.textContent = "Send RSVP";
+      submitButton.textContent = "Send RSVP ↗";
       status.textContent = response.reason === "already-submitted"
-        ? "A response has already been saved for this invitation. This RSVP is locked."
-        : "We couldn't save this demo response. Please check the invitation link and try again.";
+        ? "A response has already been saved for this invitation. This RSVP is locked. Refresh this page to see the confirmation."
+        : response.reason === "timeout"
+          ? "We haven't been able to confirm whether your RSVP was saved. Refresh this invitation link in a moment before trying again; if it was saved, you'll see the confirmation here."
+          : response.reason === "not-found"
+            ? "This invitation link is no longer active. Please contact the couple."
+            : response.reason === "not-available"
+              ? "This invitation is not currently open for responses. Please contact the couple."
+              : ["invalid-meal", "invalid-attendance", "invalid-attendees", "invalid-payload", "invalid-roster", "notes-too-long"].includes(response.reason)
+                ? "Some RSVP details need to be refreshed. Reload this invitation link and check each attendance and meal selection before submitting again."
+                : "We couldn't confirm your RSVP. Please check your connection and try again.";
       status.classList.add("form-error");
       return;
     }
 
-    payload.reference = response.reference;
     form.hidden = true;
     submittedPanel.hidden = false;
-    submittedPanel.querySelector("[data-confirmation-copy]").textContent = response.storageUnavailable
-      ? "Your demo RSVP is confirmed for this page session. Browser storage is unavailable, so this prototype cannot persist the lock after you leave this page."
-      : "Your demo RSVP has been saved in this browser. This is a prototype only — nothing has been sent to the couple or a spreadsheet.";
-    submittedPanel.querySelector("[data-reference]").textContent = response.reference;
+    submittedPanel.querySelector("[data-confirmation-copy]").textContent = isMockMode
+      ? response.storageUnavailable
+        ? "Your demo RSVP is confirmed for this page session. Browser storage is unavailable, so this prototype cannot persist the lock after you leave this page."
+        : "Your demo RSVP has been saved in this browser. This is a prototype only — nothing has been sent to the couple or a spreadsheet."
+      : "Thank you — your RSVP has been saved. The couple can view your response in their private RSVP dashboard, and this invitation is now locked.";
+    submittedPanel.querySelector("[data-reference]").textContent = response.reference || "—";
+    const referenceLabel = submittedPanel.querySelector("[data-reference-label]");
+    if (referenceLabel) referenceLabel.textContent = isMockMode ? "Demo reference" : "Confirmation reference";
   });
 }
 
-function makeGuestFields(guest, index) {
+function makeGuestFields(guest, index, mealOptions) {
   const row = document.createElement("fieldset");
   row.className = "guest-rsvp-card";
   row.dataset.guestRow = "";
@@ -126,7 +185,7 @@ function makeGuestFields(guest, index) {
   [
     { value: "yes", label: "Yes, count me in" },
     { value: "no", label: "Sorry, I can't" },
-  ].forEach((option, optionIndex) => {
+  ].forEach((option) => {
     const label = document.createElement("label");
     label.className = "radio-pill";
     const input = document.createElement("input");
@@ -136,7 +195,6 @@ function makeGuestFields(guest, index) {
     input.required = true;
     input.dataset.attendance = "";
     input.id = `${guest.id}-attendance-${option.value}`;
-    if (optionIndex === 0 && index === -1) input.checked = true;
     const text = document.createElement("span");
     text.textContent = option.label;
     label.append(input, text);
@@ -157,16 +215,14 @@ function makeGuestFields(guest, index) {
   select.id = mealId;
   select.name = mealId;
   select.required = false;
-  const options = [
-    ["", "Choose a meal"],
-    ["roast-veg", "Roast squash, crispy sage & lentils (vegan)"],
-    ["chicken", "Lemon thyme chicken, potatoes & greens"],
-    ["fish", "Herb-baked fish, buttery new potatoes"],
-  ];
-  options.forEach(([value, labelText]) => {
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Choose a meal";
+  select.appendChild(placeholder);
+  mealOptions.forEach((meal) => {
     const option = document.createElement("option");
-    option.value = value;
-    option.textContent = labelText;
+    option.value = meal.code;
+    option.textContent = meal.label;
     select.appendChild(option);
   });
   mealField.append(mealLabel, select);
@@ -174,8 +230,6 @@ function makeGuestFields(guest, index) {
   return row;
 }
 
-// CSS.escape is not present in a few older browsers; these mock ids are simple but
-// this fallback keeps selector construction predictable during local preview.
 function cssEscape(value) {
   if (window.CSS?.escape) return window.CSS.escape(value);
   return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
