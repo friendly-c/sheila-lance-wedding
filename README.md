@@ -2,7 +2,7 @@
 
 A mobile-first, scrapbook-inspired wedding website built with plain HTML, CSS and vanilla JavaScript. It has no build step, package manager, paid service, external font, external image service or third-party runtime dependency.
 
-> **Prototype content:** Ellie, Jamie, the venue, timetable, travel notes, invitation names and RSVP tokens are fictional sample content. Update these before publishing a real wedding site. The RSVP page does not connect to Google Sheets or Google Apps Script.
+> **Prototype content:** Sheila, Lance, the venue, timetable, travel notes, invitation names and RSVP tokens are fictional sample content. Update these before publishing a real wedding site. The RSVP page does not connect to Google Sheets or Google Apps Script.
 
 ## What's included
 
