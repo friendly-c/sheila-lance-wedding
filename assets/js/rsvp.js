@@ -4,9 +4,18 @@ const page = document.querySelector("[data-rsvp-page]");
 if (page) initRsvp(page);
 
 const FALLBACK_MEALS = [
-  { code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
-  { code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
-  { code: "fish", label: "Herb-baked fish, buttery new potatoes" },
+  { course: "starter", code: "burrata-tomato", label: "Burrata, heritage tomato & basil (vegetarian)" },
+  { course: "starter", code: "roasted-tomato-soup", label: "Roasted tomato soup (vegan)" },
+  { course: "main", code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
+  { course: "main", code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
+  { course: "main", code: "fish", label: "Herb-baked fish, buttery new potatoes" },
+  { course: "dessert", code: "lemon-posset", label: "Lemon posset with berry compote" },
+  { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)" },
+];
+const COURSES = [
+  { key: "starter", label: "Choose your starter" },
+  { key: "main", label: "Choose your main course" },
+  { key: "dessert", label: "Choose your dessert" },
 ];
 
 async function initRsvp(pageRoot) {
@@ -84,11 +93,13 @@ async function initRsvp(pageRoot) {
     return;
   }
 
-  const mealOptions = Array.isArray(invitation.mealOptions) && invitation.mealOptions.length
-    ? invitation.mealOptions
-    : FALLBACK_MEALS;
-  invitation.guests.forEach((guest, index) => {
-    guestList.appendChild(makeGuestFields(guest, index, mealOptions));
+  const mealOptions = normaliseMealOptions(
+    Array.isArray(invitation.mealOptions) && invitation.mealOptions.length
+      ? invitation.mealOptions
+      : FALLBACK_MEALS,
+  );
+  invitation.guests.forEach((guest) => {
+    guestList.appendChild(makeGuestFields(guest, mealOptions));
   });
 
   form.addEventListener("change", (event) => {
@@ -99,8 +110,9 @@ async function initRsvp(pageRoot) {
       if (mealField) {
         const attending = input.value === "yes";
         mealField.hidden = !attending;
-        const meal = mealField.querySelector("select");
-        if (meal) meal.required = attending;
+        mealField.querySelectorAll("select[data-meal-course]").forEach((meal) => {
+          meal.required = attending;
+        });
       }
     }
   });
@@ -113,12 +125,17 @@ async function initRsvp(pageRoot) {
 
     const attendees = invitation.guests.map((guest) => {
       const selected = form.querySelector(`input[name="attendance-${cssEscape(guest.id)}"]:checked`);
-      const meal = form.querySelector(`[name="meal-${cssEscape(guest.id)}"]`);
+      const attending = selected?.value === "yes";
+      const meals = {};
+      COURSES.forEach(({ key }) => {
+        const select = form.querySelector(`[name="${key}-${cssEscape(guest.id)}"]`);
+        meals[key] = attending ? (select?.value || "") : "";
+      });
       return {
         guestId: guest.id,
         name: guest.name,
-        attending: selected?.value === "yes",
-        meal: selected?.value === "yes" ? (meal?.value || "") : null,
+        attending,
+        meals: attending ? meals : null,
       };
     });
 
@@ -164,7 +181,18 @@ async function initRsvp(pageRoot) {
   });
 }
 
-function makeGuestFields(guest, index, mealOptions) {
+function normaliseMealOptions(meals) {
+  const grouped = { starter: [], main: [], dessert: [] };
+  meals.forEach((meal) => {
+    const course = String(meal.course || "main").toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(grouped, course)) {
+      grouped[course].push({ code: String(meal.code), label: String(meal.label) });
+    }
+  });
+  return grouped;
+}
+
+function makeGuestFields(guest, mealOptions) {
   const row = document.createElement("fieldset");
   row.className = "guest-rsvp-card";
   row.dataset.guestRow = "";
@@ -203,29 +231,45 @@ function makeGuestFields(guest, index, mealOptions) {
   row.appendChild(attendanceGroup);
 
   const mealField = document.createElement("div");
-  mealField.className = "field meal-field";
+  mealField.className = "guest-meal-fields";
   mealField.dataset.mealField = "";
   mealField.hidden = true;
-  const mealId = `meal-${guest.id}`;
-  const mealLabel = document.createElement("label");
-  mealLabel.className = "field-label";
-  mealLabel.htmlFor = mealId;
-  mealLabel.textContent = "Pick your main";
-  const select = document.createElement("select");
-  select.id = mealId;
-  select.name = mealId;
-  select.required = false;
-  const placeholder = document.createElement("option");
-  placeholder.value = "";
-  placeholder.textContent = "Choose a meal";
-  select.appendChild(placeholder);
-  mealOptions.forEach((meal) => {
-    const option = document.createElement("option");
-    option.value = meal.code;
-    option.textContent = meal.label;
-    select.appendChild(option);
+
+  COURSES.forEach(({ key, label: courseLabel }) => {
+    const field = document.createElement("div");
+    field.className = "field meal-course-field";
+    const selectId = `${key}-${guest.id}`;
+    const label = document.createElement("label");
+    label.className = "field-label";
+    label.htmlFor = selectId;
+    label.textContent = courseLabel;
+
+    const select = document.createElement("select");
+    select.id = selectId;
+    select.name = selectId;
+    select.dataset.mealCourse = key;
+    select.required = false;
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Choose an option";
+    select.appendChild(placeholder);
+
+    mealOptions[key].forEach((meal) => {
+      const option = document.createElement("option");
+      option.value = meal.code;
+      option.textContent = meal.label;
+      select.appendChild(option);
+    });
+    if (!mealOptions[key].length) {
+      select.disabled = true;
+      const unavailable = document.createElement("option");
+      unavailable.value = "";
+      unavailable.textContent = "Options not yet available";
+      select.appendChild(unavailable);
+    }
+    field.append(label, select);
+    mealField.appendChild(field);
   });
-  mealField.append(mealLabel, select);
   row.appendChild(mealField);
   return row;
 }

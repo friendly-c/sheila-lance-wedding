@@ -10,9 +10,13 @@ import { rsvpConfig } from "./rsvp-config.js";
 
 const STORAGE_PREFIX = "wedding-rsvp-prototype:";
 const DEFAULT_MEALS = [
-  { code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
-  { code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
-  { code: "fish", label: "Herb-baked fish, buttery new potatoes" },
+  { course: "starter", code: "burrata-tomato", label: "Burrata, heritage tomato & basil (vegetarian)" },
+  { course: "starter", code: "roasted-tomato-soup", label: "Roasted tomato soup (vegan)" },
+  { course: "main", code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
+  { course: "main", code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
+  { course: "main", code: "fish", label: "Herb-baked fish, buttery new potatoes" },
+  { course: "dessert", code: "lemon-posset", label: "Lemon posset with berry compote" },
+  { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)" },
 ];
 
 export const isMockMode = rsvpConfig.mode !== "apps-script";

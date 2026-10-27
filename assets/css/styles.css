@@ -192,6 +192,10 @@ main { overflow: clip; }
 .guest-rsvp-list { display: grid; gap: 1rem; margin: 1.3rem 0; }
 .guest-rsvp-card { min-width: 0; margin: 0; padding: 1rem; border: 1.5px solid var(--line); background: var(--paper); }
 .guest-rsvp-card legend { padding: 0 .4rem; }
+.guest-meal-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; margin-top: 1rem; padding-top: .9rem; border-top: 1px dashed var(--line); }
+.meal-course-field { min-width: 0; margin: 0; padding: .65rem; border: 1px dashed var(--line); background: rgba(255,255,255,.75); }
+.meal-course-field .field-label { min-height: 2.4em; font-size: .82rem; }
+.meal-course-field select { font-size: .9rem; padding: .6rem; }
 .guest-rsvp-name { font: 1.75rem/.95 var(--font-display); text-transform: uppercase; }
 .field-label { display: block; margin-bottom: .45rem; font-weight: 900; font-size: .9rem; }
 .attendance-options { display: flex; flex-wrap: wrap; gap: .55rem; margin: .2rem 0 .9rem; }
@@ -285,6 +289,8 @@ main { overflow: clip; }
   .rsvp-paper { padding: 1.3rem 1rem 1.1rem; box-shadow: 5px 5px 0 var(--ink); }
   .rsvp-paper::before { right: 10px; font-size: .8rem; }
   .guest-rsvp-card { padding: .8rem; }
+  .guest-meal-fields { grid-template-columns: 1fr; gap: .4rem; }
+  .meal-course-field .field-label { min-height: 0; }
   .radio-pill { width: 100%; border-radius: 8px; }
   .form-footer .btn { width: 100%; }
   .footer-inner { align-items: flex-start; flex-direction: column; }

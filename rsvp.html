@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fff8eb">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fff8eb"><meta name="referrer" content="no-referrer">
   <meta name="description" content="A personalised RSVP page for Ellie and Jamie's wedding — prototype invitations only.">
   <title>Your RSVP — Ellie &amp; Jamie</title><link rel="icon" href="./assets/images/sun-scribble.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/css/styles.css">
   <script type="module" src="./assets/js/site.js"></script>
@@ -10,7 +10,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="top-ticker" aria-label="Wedding announcement"><div class="ticker-track" aria-hidden="true"><span>You're on the list <b>✳</b> RSVP please <b>✳</b> Save us a dance <b>✳</b></span><span>You're on the list <b>✳</b> RSVP please <b>✳</b> Save us a dance <b>✳</b></span><span>You're on the list <b>✳</b> RSVP please <b>✳</b> Save us a dance <b>✳</b></span></div></div>
-  <header class="site-header"><div class="nav-wrap"><a class="brand" href="./index.html" aria-label="All the Love Club, home"><span class="brand-mark">E + J</span><span class="brand-copy">All the love club<small>Est. for one very good day</small></span></a><button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">☰</button><nav class="site-nav" id="site-nav" data-site-nav aria-label="Main navigation"><a href="./index.html">Home</a><a href="./details.html">The day</a><a href="./travel.html">Getting here</a><a href="./faqs.html">FAQs</a><a class="nav-rsvp" href="./rsvp.html?invite=demo-olive-finch" aria-current="page">RSVP <span aria-hidden="true">↗</span></a></nav></div></header>
+  <header class="site-header"><div class="nav-wrap"><a class="brand" href="./index.html" aria-label="All the Love Club, home"><span class="brand-mark">E + J</span><span class="brand-copy">All the love club<small>Est. for one very good day</small></span></a><button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">☰</button><nav class="site-nav" id="site-nav" data-site-nav aria-label="Main navigation"><a href="./index.html">Home</a><a href="./details.html">The day</a><a href="./travel.html">Getting here</a><a href="./faqs.html">FAQs</a><a class="nav-rsvp" href="./rsvp.html" aria-current="page">RSVP <span aria-hidden="true">↗</span></a></nav></div></header>
   <main id="main" data-rsvp-page>
     <div class="rsvp-shell">
       <section class="rsvp-paper" aria-labelledby="rsvp-heading">
@@ -20,8 +20,8 @@
           <h1 class="rsvp-title">Let's find<br>your invite.</h1>
           <p data-invalid-token></p>
           <p><strong>Sample links for testing:</strong></p>
-          <div class="demo-links">
-            <a href="./rsvp.html?invite=demo-olive-finch">Olive &amp; Noah Finch (2 guests) ↗</a>
+          <div class="demo-links" data-rsvp-demo-only>
+            <a href="./rsvp.html">Olive &amp; Noah Finch (2 guests) ↗</a>
             <a href="./rsvp.html?invite=demo-river-james">River James (1 guest) ↗</a>
             <a href="./rsvp.html?invite=demo-morgan-park">Morgan &amp; Taylor Park (2 guests) ↗</a>
           </div>
@@ -32,24 +32,24 @@
           <span class="party-count" data-party-count></span>
           <p class="invite-note" data-invite-note></p>
           <form data-rsvp-form novalidate>
-            <p>Can you make it? Let us know for everyone listed below. If you're joining us, pick your main course too.</p>
+            <p>Can you make it? Let us know for everyone listed below. If you're joining us, choose a starter, main course and dessert.</p>
             <div class="guest-rsvp-list" data-rsvp-guests></div>
-            <div class="field"><label class="field-label" for="dietary-notes">Food allergies, dietary needs or a note for us</label><textarea id="dietary-notes" name="dietary-notes" placeholder="Anything we should know? (Optional)"></textarea><span class="field-hint">Please include anything important for catering or access. This prototype stores notes only in this browser.</span></div>
+            <div class="field"><label class="field-label" for="dietary-notes">Food allergies, dietary needs or a note for us</label><textarea id="dietary-notes" name="dietary-notes" maxlength="1000" placeholder="Anything we should know? (Optional)"></textarea><span class="field-hint"><span data-dietary-hint>Please include anything important for catering or access. This prototype stores notes only in this browser.</span></span></div>
             <p class="form-status" data-rsvp-status role="status" aria-live="polite"></p>
-            <div class="form-footer"><button class="btn btn-primary" type="submit" data-rsvp-submit>Send RSVP <span aria-hidden="true">↗</span></button><span class="field-hint">Demo only. Your response will not be sent to the couple.</span></div>
+            <div class="form-footer"><button class="btn btn-primary" type="submit" data-rsvp-submit>Send RSVP <span aria-hidden="true">↗</span></button><span class="field-hint" data-rsvp-mode-hint>Demo only. Your response will not be sent to the couple.</span></div>
           </form>
           <section class="confirmation" data-rsvp-confirmation hidden aria-live="polite" aria-labelledby="confirmation-heading">
             <span class="confirmation-mark" aria-hidden="true">✓</span>
             <h2 id="confirmation-heading">It's in the scrapbook.</h2>
             <p data-confirmation-copy></p>
-            <p><strong>Demo reference</strong><br><span class="reference-code" data-reference>DEMO</span></p>
+            <p><strong data-reference-label>Demo reference</strong><br><span class="reference-code" data-reference>DEMO</span></p>
             <p><a class="text-link" href="./index.html">Back to the home page <span aria-hidden="true">↗</span></a></p>
           </section>
         </div>
       </section>
-      <p class="field-hint" style="text-align:center;margin-top:1.5rem">This is a demonstration RSVP only. Invitation tokens and responses are mock data stored locally in your browser, not in Google Sheets.</p>
+      <p class="field-hint" data-rsvp-demo-only style="text-align:center;margin-top:1.5rem">This is a demonstration RSVP only. Invitation tokens and responses are mock data stored locally in your browser, not in Google Sheets.</p>
     </div>
     <section class="closing-band"><div class="container"><h2>Thanks for<br>being here.</h2><p>We have a feeling it's going to be a good one.</p><a class="btn" href="./details.html">Check the plan <span aria-hidden="true">↗</span></a></div></section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><div><div class="footer-brand">Ellie + Jamie / All the Love Club</div><p>Personalised RSVP prototype · no spreadsheet connection.</p><p>© <span data-current-year>2026</span></p></div><div class="footer-links"><a href="./index.html">Home</a><a href="./details.html">The day</a><a href="./travel.html">Travel</a><a href="./faqs.html">FAQs</a></div></div></footer>
+  <footer class="site-footer"><div class="container footer-inner"><div><div class="footer-brand">Ellie + Jamie / All the Love Club</div><p>Personalised RSVP page · invitation-only.</p><p>© <span data-current-year>2026</span></p></div><div class="footer-links"><a href="./index.html">Home</a><a href="./details.html">The day</a><a href="./travel.html">Travel</a><a href="./faqs.html">FAQs</a></div></div></footer>
 </body></html>
