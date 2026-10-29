@@ -4,13 +4,17 @@ const page = document.querySelector("[data-rsvp-page]");
 if (page) initRsvp(page);
 
 const FALLBACK_MEALS = [
-  { course: "starter", code: "burrata-tomato", label: "Burrata, heritage tomato & basil (vegetarian)" },
-  { course: "starter", code: "roasted-tomato-soup", label: "Roasted tomato soup (vegan)" },
-  { course: "main", code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
-  { course: "main", code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
-  { course: "main", code: "fish", label: "Herb-baked fish, buttery new potatoes" },
-  { course: "dessert", code: "lemon-posset", label: "Lemon posset with berry compote" },
-  { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)" },
+  { course: "starter", code: "burrata-tomato", label: "Burrata, heritage tomato & basil (vegetarian)", guestType: "ADULT" },
+  { course: "starter", code: "roasted-tomato-soup", label: "Roasted tomato soup (vegan)", guestType: "ADULT" },
+  { course: "starter", code: "child-fruit-sticks", label: "Fruit and vegetable sticks (sample child menu)", guestType: "CHILD" },
+  { course: "main", code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)", guestType: "ADULT" },
+  { course: "main", code: "chicken", label: "Lemon thyme chicken, potatoes & greens", guestType: "ADULT" },
+  { course: "main", code: "fish", label: "Herb-baked fish, buttery new potatoes", guestType: "ADULT" },
+  { course: "main", code: "child-chicken-goujons", label: "Chicken goujons, chips & peas (sample child menu)", guestType: "CHILD" },
+  { course: "main", code: "child-macaroni-cheese", label: "Macaroni cheese (sample child menu)", guestType: "CHILD" },
+  { course: "dessert", code: "lemon-posset", label: "Lemon posset with berry compote", guestType: "ADULT" },
+  { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)", guestType: "ADULT" },
+  { course: "dessert", code: "child-ice-cream", label: "Ice cream (sample child menu)", guestType: "CHILD" },
 ];
 const COURSES = [
   { key: "starter", label: "Choose your starter" },
@@ -77,9 +81,11 @@ async function initRsvp(pageRoot) {
   const eveningOnly = invitationType === "EVENING_ONLY";
   content.hidden = false;
   pageRoot.querySelector("[data-party-name]").textContent = invitation.partyName;
-  pageRoot.querySelector("[data-party-count]").textContent = invitation.guests.length === 1
-    ? "1 guest invited"
-    : `${invitation.guests.length} guests invited`;
+  const childCount = invitation.guests.filter((guest) => normaliseGuestType(guest.guestType) === "CHILD").length;
+  const guestCountLabel = `${invitation.guests.length} ${invitation.guests.length === 1 ? "guest" : "guests"} invited`;
+  pageRoot.querySelector("[data-party-count]").textContent = childCount
+    ? `${guestCountLabel} · ${childCount} ${childCount === 1 ? "child" : "children"}`
+    : guestCountLabel;
   note.textContent = invitation.note;
   const instructions = pageRoot.querySelector("[data-rsvp-instructions]");
   if (instructions) {
@@ -199,13 +205,28 @@ function normaliseMealOptions(meals) {
   meals.forEach((meal) => {
     const course = String(meal.course || "main").toLowerCase();
     if (Object.prototype.hasOwnProperty.call(grouped, course)) {
-      grouped[course].push({ code: String(meal.code), label: String(meal.label) });
+      grouped[course].push({
+        code: String(meal.code),
+        label: String(meal.label),
+        guestType: normaliseMealGuestType(meal.guestType),
+      });
     }
   });
   return grouped;
 }
 
+function normaliseGuestType(value) {
+  const type = String(value || "ADULT").trim().toUpperCase();
+  return type === "CHILD" ? "CHILD" : "ADULT";
+}
+
+function normaliseMealGuestType(value) {
+  const type = String(value || "ADULT").trim().toUpperCase();
+  return ["ALL", "ADULT", "CHILD"].includes(type) ? type : "ADULT";
+}
+
 function makeGuestFields(guest, mealOptions, eveningOnly) {
+  const guestType = normaliseGuestType(guest.guestType);
   const row = document.createElement("fieldset");
   row.className = "guest-rsvp-card";
   row.dataset.guestRow = "";
@@ -213,6 +234,11 @@ function makeGuestFields(guest, mealOptions, eveningOnly) {
   const legend = document.createElement("legend");
   legend.className = "guest-rsvp-name";
   legend.textContent = guest.name;
+  const typeTag = document.createElement("span");
+  typeTag.className = "guest-type-tag guest-type-" + guestType.toLowerCase();
+  typeTag.textContent = guestType === "CHILD" ? "Child" : "Adult";
+  legend.appendChild(document.createTextNode(" "));
+  legend.appendChild(typeTag);
   row.appendChild(legend);
 
   const attendanceGroup = document.createElement("div");
@@ -268,13 +294,16 @@ function makeGuestFields(guest, mealOptions, eveningOnly) {
       placeholder.textContent = "Choose an option";
       select.appendChild(placeholder);
 
-      mealOptions[key].forEach((meal) => {
-        const option = document.createElement("option");
-        option.value = meal.code;
-        option.textContent = meal.label;
-        select.appendChild(option);
-      });
-      if (!mealOptions[key].length) {
+      mealOptions[key]
+        .filter((meal) => meal.guestType === "ALL" || meal.guestType === guestType)
+        .forEach((meal) => {
+          const option = document.createElement("option");
+          option.value = meal.code;
+          option.textContent = meal.label;
+          select.appendChild(option);
+        });
+      const eligibleMeals = mealOptions[key].filter((meal) => meal.guestType === "ALL" || meal.guestType === guestType);
+      if (!eligibleMeals.length) {
         select.disabled = true;
         const unavailable = document.createElement("option");
         unavailable.value = "";

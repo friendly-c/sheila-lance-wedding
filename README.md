@@ -106,3 +106,10 @@ No real endpoint, spreadsheet ID, credential, API secret or production guest dat
 - RSVP fields use fieldsets/legends, required attendance choices, conditional required meal inputs and announced status/confirmation regions.
 - The CSS honours `prefers-reduced-motion` and avoids external fonts or remotely loaded images.
 - A recent browser with JavaScript modules, CSS grid and `localStorage` enabled is recommended for the full prototype experience. Content navigation remains ordinary HTML links.
+
+
+## Adult and child guest types
+
+The live RSVP system stores each invited person's type as `ADULT` or `CHILD` in the private Google Sheet. Meal choices are configured per course and can be made available to `ADULT`, `CHILD`, or `ALL` guest types. The RSVP page filters choices by the server-supplied guest type; Apps Script validates the selections again before recording them.
+
+For mock testing, use `rsvp.html?invite=demo-family-with-child`. Its child menu labels are illustrative only. The real menu is maintained in the private **Meal Options** sheet, not in this public repository.
