@@ -301,3 +301,20 @@ main { overflow: clip; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .ticker-track { animation: none; }
 }
+
+
+/* Guest type tag on RSVP cards. */
+.guest-type-tag {
+  display: inline-block;
+  vertical-align: .15em;
+  margin-left: .35rem;
+  padding: .22rem .48rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--mint);
+  color: var(--ink);
+  font: 900 .62rem/1 var(--font-body);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.guest-type-child { background: var(--coral); }

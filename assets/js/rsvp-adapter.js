@@ -10,13 +10,17 @@ import { rsvpConfig } from "./rsvp-config.js";
 
 const STORAGE_PREFIX = "wedding-rsvp-prototype:";
 const DEFAULT_MEALS = [
-  { course: "starter", code: "burrata-tomato", label: "Burrata, heritage tomato & basil (vegetarian)" },
-  { course: "starter", code: "roasted-tomato-soup", label: "Roasted tomato soup (vegan)" },
-  { course: "main", code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)" },
-  { course: "main", code: "chicken", label: "Lemon thyme chicken, potatoes & greens" },
-  { course: "main", code: "fish", label: "Herb-baked fish, buttery new potatoes" },
-  { course: "dessert", code: "lemon-posset", label: "Lemon posset with berry compote" },
-  { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)" },
+  { course: "starter", code: "burrata-tomato", label: "Burrata, heritage tomato & basil (vegetarian)", guestType: "ADULT" },
+  { course: "starter", code: "roasted-tomato-soup", label: "Roasted tomato soup (vegan)", guestType: "ADULT" },
+  { course: "starter", code: "child-fruit-sticks", label: "Fruit and vegetable sticks (sample child menu)", guestType: "CHILD" },
+  { course: "main", code: "roast-veg", label: "Roast squash, crispy sage & lentils (vegan)", guestType: "ADULT" },
+  { course: "main", code: "chicken", label: "Lemon thyme chicken, potatoes & greens", guestType: "ADULT" },
+  { course: "main", code: "fish", label: "Herb-baked fish, buttery new potatoes", guestType: "ADULT" },
+  { course: "main", code: "child-chicken-goujons", label: "Chicken goujons, chips & peas (sample child menu)", guestType: "CHILD" },
+  { course: "main", code: "child-macaroni-cheese", label: "Macaroni cheese (sample child menu)", guestType: "CHILD" },
+  { course: "dessert", code: "lemon-posset", label: "Lemon posset with berry compote", guestType: "ADULT" },
+  { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)", guestType: "ADULT" },
+  { course: "dessert", code: "child-ice-cream", label: "Ice cream (sample child menu)", guestType: "CHILD" },
 ];
 
 export const isMockMode = rsvpConfig.mode !== "apps-script";
