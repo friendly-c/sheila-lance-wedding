@@ -2,7 +2,7 @@
 
 A mobile-first, scrapbook-inspired wedding website built with plain HTML, CSS and vanilla JavaScript. It has no build step, package manager, paid service, external font, external image service or third-party runtime dependency.
 
-> **Prototype content:** Sheila, Lance, the venue, timetable, travel notes, invitation names and RSVP tokens are fictional sample content. Update these before publishing a real wedding site. The RSVP page does not connect to Google Sheets or Google Apps Script.
+> **Content status:** Some venue, timetable, travel and menu copy remains placeholder and needs the couple's confirmation before launch. The live RSVP page is configured to use Google Apps Script; it validates unique invitation tokens and records responses in the private Google Sheet. Sample invitation links on the RSVP error state are available only in mock mode. Production guest links come from the private `Invitations` sheet.
 
 ## What's included
 
@@ -12,7 +12,7 @@ wedding-website-prototype/
 ├── details.html               # Schedule, venue placeholder and dress code
 ├── travel.html                # Transport, parking and accommodation placeholders
 ├── faqs.html                  # Keyboard-accessible native FAQ accordions
-├── rsvp.html                  # Personalised mock invitation and form
+├── rsvp.html                  # Personalised full-day / evening RSVP form
 ├── README.md
 ├── .nojekyll                  # Tells GitHub Pages not to process the folder with Jekyll
 └── assets/
@@ -48,9 +48,9 @@ Because the scripts use native JavaScript modules, preview the files through a l
 
 Alternatively, use the Live Server extension in Visual Studio Code.
 
-## Test the RSVP prototype
+## Test mock RSVP locally
 
-Use one of the following sample invitation links while the local server is running:
+For local interface testing, set `mode: "mock"` in `assets/js/rsvp-config.js` and use one of the following sample invitation links while the local server is running. Do not use these example tokens in the deployed live site:
 
 - `http://localhost:8000/rsvp.html?invite=demo-olive-finch` — Olive and Noah Finch (two guests)
 - `http://localhost:8000/rsvp.html?invite=demo-river-james` — River James (one guest)
@@ -82,21 +82,19 @@ All page links, scripts, styles and local SVG references use relative paths (for
 - **Artwork and placeholder imagery:** replace the SVGs in `assets/images/` with your own optimised local images, retaining filenames or updating their references in the HTML/CSS. The SVG artwork is editable text-based source, not an external service.
 - **Invitation samples:** edit `assets/js/mock-invitations.js`. Keep it fictional until the real RSVP integration is built; don't publish a real guest list or private guest data to a public repository.
 
-## RSVP integration boundary
+## Live RSVP and spreadsheet integration
 
-`assets/js/rsvp.js` imports only `loadInvitation()` and `submitRsvp()` from `assets/js/rsvp-adapter.js`. That is the intended seam for future integration. The current adapter imports fictional records, makes no network calls and stores mock submissions in the visitor's own browser.
+The RSVP page imports `loadInvitation()` and `submitRsvp()` from `assets/js/rsvp-adapter.js`. The adapter supports both local mock mode and the deployed Apps Script backend. Keep the public `assets/js/rsvp-config.js` endpoint URL current and never place credentials or spreadsheet IDs in the public bundle.
 
-When integrating Google Apps Script:
+The private Google Sheet is the source of truth for invitations, invited guests, guest types, menu options, submissions and individual responses. Full-day invitations collect attendance and (for each attending guest) starter, main and dessert choices. Evening-only invitations collect attendance only. The backend validates invitation tokens, guest membership, course eligibility and the one-submission lock.
 
-1. Replace the mock functions in `rsvp-adapter.js` with calls to the deployed Apps Script web app. Keep the two exported function names and result shapes, or update the RSVP UI to match the server responses.
-2. Store the invitation-token-to-guest mapping in the private spreadsheet/server-side data layer, not in the public JavaScript bundle.
-3. Generate unique, opaque, high-entropy invitation tokens and validate each token server-side before returning guest names.
-4. Validate the guest IDs, attendance values, meal options and note lengths server-side. Do not trust client-side form checks.
-5. Enforce the one-submission lock on the server as well as in the interface; local storage alone is not secure or authoritative.
-6. Return only data needed for the invitation and a safe confirmation reference. Do not expose spreadsheet IDs, credentials, API secrets or private guest records in client-side code.
-7. Test the web app deployment, permissions, cross-origin behaviour and failure modes from the published GitHub Pages origin before using it with guests.
+### Adult and child menus
 
-No real endpoint, spreadsheet ID, credential, API secret or production guest data is included in this prototype.
+Each guest has a `guest_type` of `ADULT` or `CHILD` in the private `Guests` tab. Each row in `Meal Options` has a course (`starter`, `main`, `dessert`) and a guest type: `ADULT`, `CHILD` or `ALL`. Each `meal_code` should be unique. The frontend filters choices for each guest, and Apps Script validates the selection independently. Existing guest and meal option rows are migrated to `ADULT`; review the private sheet and set child rows and child meal options before sending real invitations.
+
+To test the UI locally, use `rsvp.html?invite=demo-family-with-child` in mock mode. The child meal labels in the public mock records are examples only and are not used by the live backend.
+
+For backend deployment and spreadsheet schema details, use the accompanying children-menu backend upgrade instructions. Re-run the backend setup migration only after backing up the sheet, and keep the site out of use while coordinating website and backend changes.
 
 ## Accessibility and browser behaviour
 
@@ -108,8 +106,3 @@ No real endpoint, spreadsheet ID, credential, API secret or production guest dat
 - A recent browser with JavaScript modules, CSS grid and `localStorage` enabled is recommended for the full prototype experience. Content navigation remains ordinary HTML links.
 
 
-## Adult and child guest types
-
-The live RSVP system stores each invited person's type as `ADULT` or `CHILD` in the private Google Sheet. Meal choices are configured per course and can be made available to `ADULT`, `CHILD`, or `ALL` guest types. The RSVP page filters choices by the server-supplied guest type; Apps Script validates the selections again before recording them.
-
-For mock testing, use `rsvp.html?invite=demo-family-with-child`. Its child menu labels are illustrative only. The real menu is maintained in the private **Meal Options** sheet, not in this public repository.
