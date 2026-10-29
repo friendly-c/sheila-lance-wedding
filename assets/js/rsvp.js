@@ -16,10 +16,12 @@ const FALLBACK_MEALS = [
   { course: "dessert", code: "chocolate-torte", label: "Dark chocolate torte (vegan)", guestType: "ADULT" },
   { course: "dessert", code: "child-ice-cream", label: "Ice cream (sample child menu)", guestType: "CHILD" },
 ];
+// Keep the data keys aligned to the backend schema. For child guests, the
+// "starter" course is used for side choices in the existing Meal Options sheet.
 const COURSES = [
-  { key: "starter", label: "Choose your starter" },
-  { key: "main", label: "Choose your main course" },
-  { key: "dessert", label: "Choose your dessert" },
+  { key: "starter", adultLabel: "Choose your starter", childLabel: "Choose your side" },
+  { key: "main", adultLabel: "Choose your main course", childLabel: "Choose your main" },
+  { key: "dessert", adultLabel: "Choose your dessert", childLabel: "Choose your dessert" },
 ];
 
 async function initRsvp(pageRoot) {
@@ -91,7 +93,9 @@ async function initRsvp(pageRoot) {
   if (instructions) {
     instructions.textContent = eveningOnly
       ? "Please let us know whether each person can join us for the evening celebration. This invitation doesn't require meal choices."
-      : "Can you make it? Let us know for everyone listed below. If you're joining us for the full day, choose a starter, main course and dessert.";
+      : childCount > 0
+        ? "Can you make it? Let us know for everyone listed below. Adults choose a starter, main course and dessert; children choose a main, side and dessert."
+        : "Can you make it? Let us know for everyone listed below. If you're joining us for the full day, choose a starter, main course and dessert.";
   }
   const dietaryLabel = pageRoot.querySelector('label[for="dietary-notes"]');
   if (dietaryLabel && eveningOnly) dietaryLabel.textContent = "Any dietary notes or a note for us (optional)";
@@ -275,7 +279,16 @@ function makeGuestFields(guest, mealOptions, eveningOnly) {
     mealField.dataset.mealField = "";
     mealField.hidden = true;
 
-    COURSES.forEach(({ key, label: courseLabel }) => {
+    // Display order differs for children, while the keys sent to Apps Script
+    // remain starter/main/dessert for compatibility with the current schema.
+    const displayKeys = guestType === "CHILD"
+      ? ["main", "starter", "dessert"]
+      : ["starter", "main", "dessert"];
+
+    displayKeys.forEach((key) => {
+      const course = COURSES.find((item) => item.key === key);
+      if (!course) return;
+      const courseLabel = guestType === "CHILD" ? course.childLabel : course.adultLabel;
       const field = document.createElement("div");
       field.className = "field meal-course-field";
       const selectId = `${key}-${guest.id}`;
