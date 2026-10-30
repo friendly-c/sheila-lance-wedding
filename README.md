@@ -1,6 +1,6 @@
 # Sheila & Lance — wedding website
 
-A mobile-first, scrapbook-inspired wedding website built with plain HTML, CSS and vanilla JavaScript. It has no build step, package manager, paid service, external font, external image service or third-party runtime dependency.
+A mobile-first, botanical invitation-inspired wedding website built with plain HTML, CSS and vanilla JavaScript. It has no build step, package manager, paid service, external font, external image service or third-party runtime dependency.
 
 > **Content status:** The venue and core travel details are confirmed for The Mill at Elstead. Public transport is limited, so guests should check operator timetables nearer the date and arrange their own return journey. Other page content, including contact and menu details, may still need the couple's review. The live RSVP page is configured to use Google Apps Script; it validates unique invitation tokens and records responses in the private Google Sheet. Sample invitation links on the RSVP error state are available only in mock mode. Production guest links come from the private `Invitations` sheet.
 
@@ -21,7 +21,7 @@ wedding-website-prototype/
     ├── images/
     │   ├── flower-doodle.svg
     │   ├── hero-couple.svg
-    │   ├── map-scribble.svg
+    │   ├── botanical-spray.svg\n│   ├── map-scribble.svg
     │   ├── rings-doodle.svg
     │   └── sun-scribble.svg
     └── js/
@@ -78,8 +78,8 @@ All page links, scripts, styles and local SVG references use relative paths (for
 
 - **Couple, date and venue:** edit `assets/js/site-config.js`. Change `dateISO` to an ISO-8601 date/time with the correct local time-zone offset; it drives the countdown.
 - **Page text and schedule:** edit the relevant `.html` page. Replace placeholder schedule, dress-code, travel, accessibility and FAQ details with confirmed information.
-- **Colours, layouts and type:** edit the CSS variables at the top of `assets/css/styles.css`. The type stack uses system fonts only.
-- **Artwork and placeholder imagery:** replace the SVGs in `assets/images/` with your own optimised local images, retaining filenames or updating their references in the HTML/CSS. The SVG artwork is editable text-based source, not an external service.
+- **Colours, layouts and type:** edit the CSS variables at the top of `assets/css/styles.css`. The invitation-inspired design uses system serif fonts and local botanical SVG artwork.
+- **Artwork and photography:** replace the SVGs in `assets/images/` with your own optimised local images, retaining filenames or updating their references in the HTML/CSS. The homepage and travel page use a photograph hosted by The Mill at Elstead's official website. The botanical decoration is editable local SVG artwork.
 - **Invitation samples:** edit `assets/js/mock-invitations.js`. Keep it fictional until the real RSVP integration is built; don't publish a real guest list or private guest data to a public repository.
 
 ## Live RSVP and spreadsheet integration
