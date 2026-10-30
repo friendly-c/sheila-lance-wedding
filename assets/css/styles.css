@@ -755,3 +755,335 @@ main { overflow: clip; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* FINAL MOCKUP-FIDELITY PASS — invitation stationery layout and component QA */
+:root {
+  --paper: #f8f4ec; --paper-deep: #eee5d7; --ink: #422c2c;
+  --blue: #650d2d; --blue-dark: #4b0922; --coral: #a98960;
+  --yellow: #c8ad80; --lilac: #eee5d8; --mint: #e0e5d8;
+  --line: rgba(105,65,58,.22);
+  --font-display: "Bodoni MT", Didot, "Palatino Linotype", Georgia, serif;
+  --font-body: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+html { scroll-behavior: smooth; }
+body { overflow-x:hidden; background:var(--paper); color:#463834; font-family:var(--font-body); font-size:16px; line-height:1.62; }
+main { overflow:visible; }
+.top-ticker { display:none !important; }
+.site-header { background:rgba(248,244,236,.98); border-bottom:1px solid rgba(160,129,91,.35); }
+.nav-wrap { width:min(1240px,calc(100% - 3rem)); min-height:70px; }
+.brand { gap:.7rem; letter-spacing:.02em; }
+.brand-mark { width:42px; height:42px; border:1px solid #b99b70; border-radius:50%; background:var(--blue); color:#ead9b9; box-shadow:none; transform:none; font:1rem/1 var(--font-display); }
+.brand-copy { color:var(--blue); display:grid; font:500 .94rem/1.1 var(--font-display); letter-spacing:.08em; text-transform:uppercase; }
+.brand-copy small { margin-top:.25rem; color:#806b54; font:500 .58rem/1.1 var(--font-body); letter-spacing:.17em; }
+.site-nav { gap:clamp(.8rem,2vw,1.7rem); }
+.site-nav a { color:#513e38; font:500 .9rem/1.3 var(--font-body); border-bottom:1px solid transparent; padding:.5rem 0; }
+.site-nav a:hover,.site-nav a[aria-current="page"] { color:var(--blue); border-color:#a98960; }
+.site-nav .nav-rsvp { padding:.68rem 1.25rem; border:1px solid #a98960; border-radius:3px; background:var(--blue); color:#fbf3e6; box-shadow:none; letter-spacing:.04em; }
+.site-nav .nav-rsvp:hover,.site-nav .nav-rsvp[aria-current="page"] { background:#7a1a39; color:#fff8ed; border-color:#c9ad80; }
+.menu-toggle { border:1px solid #a98960; border-radius:2px; background:transparent; color:var(--blue); box-shadow:none; }
+.container { width:min(1180px,calc(100% - 3rem)); }
+.kicker { display:inline-flex; align-items:center; gap:.55rem; color:#a7895e; font:500 .69rem/1.4 var(--font-body); letter-spacing:.2em; text-transform:uppercase; }
+.kicker::before { content:"✦"; color:#ad8b5c; font-size:.85rem; }
+.display-title { margin:.4rem 0 1rem; color:var(--blue); font:400 clamp(3rem,6.8vw,5.7rem)/1.02 var(--font-display); letter-spacing:.025em; text-transform:none; }
+.display-title .outline { color:transparent; -webkit-text-stroke:1px #b89b70; }
+.lede { color:#5d4d45; font:400 clamp(1rem,1.5vw,1.12rem)/1.65 var(--font-body); }
+.section { padding:clamp(3rem,6vw,5.5rem) 0; }
+.section-heading { align-items:end; margin-bottom:2rem; }
+.section-heading h2 { color:var(--blue); font:400 clamp(2.2rem,4.6vw,3.8rem)/1.08 var(--font-display); letter-spacing:.025em; text-transform:none; }
+.section-heading p { color:#766459; font-size:.98rem; }
+
+/* HOME: split invitation hero, venue photograph and full-width countdown. */
+.hero { position:relative; isolation:isolate; padding:clamp(2.5rem,5vw,4.4rem) 0 2.5rem; background:var(--paper); }
+.hero::before,.hero::after {
+  content:""; position:absolute; z-index:-1; width:clamp(160px,22vw,280px); height:clamp(240px,31vw,390px);
+  background:url("../images/botanical-spray.svg") center/contain no-repeat; opacity:.62; pointer-events:none;
+}
+.hero::before { top:-50px; left:-85px; transform:rotate(-8deg); }
+.hero::after { right:-90px; bottom:-20px; transform:scaleX(-1) rotate(8deg); }
+.hero-grid { grid-template-columns:minmax(0,.92fr) minmax(340px,1.08fr); align-items:center; gap:clamp(2.2rem,5.5vw,5.3rem); }
+.hero-copy { padding:.4rem 0; }
+.hero-eyebrow { padding:0 0 .55rem; border:0; border-bottom:1px solid #b89c73; border-radius:0; background:transparent; color:#8b6f4e; font:500 .68rem/1.4 var(--font-body); letter-spacing:.2em; transform:none; }
+.hero-eyebrow span { color:#a7895e; }
+.hero-title { margin:1.1rem 0 1.2rem; color:var(--blue); font:400 clamp(4rem,8vw,7rem)/.94 var(--font-display); letter-spacing:.035em; text-transform:none; }
+.hero-title span { display:block; }
+.hero-title .amp { margin:-.01em 0 -.02em .8rem; color:#a98a60; font:italic 400 .68em/.7 var(--font-display); transform:none; -webkit-text-stroke:0; }
+.hero-title .last-name { margin-left:.08em; }
+.hero-copy .lede { max-width:440px; }
+.hero-date { margin:1.2rem 0 .25rem; color:#6f5141; }
+.hero-venue { margin:.25rem 0 0; color:#6d5b4d; font:500 .78rem/1.45 var(--font-body); letter-spacing:.12em; text-transform:uppercase; }
+.hero-scribble,.sticker,.hero-flower { display:none !important; }
+.hero-art { min-height:clamp(340px,39vw,470px); }
+.hero-photo { top:2%; left:4%; width:88%; height:clamp(320px,36vw,445px); padding:9px 9px 12px; border:1px solid #b99c74; background:#fffdf8; box-shadow:0 12px 30px rgba(61,37,34,.12); transform:rotate(1deg); }
+.hero-photo img { width:100%; height:100%; object-fit:cover; object-position:center 54%; }
+.tape { top:-11px; left:44%; width:88px; height:23px; border:0; background:rgba(203,178,135,.55); transform:rotate(-4deg); }
+.button-row { gap:.85rem; margin-top:1.35rem; }
+.countdown-band { position:relative; isolation:isolate; overflow:hidden; padding:1.6rem 0; background:var(--blue); color:#f6ead4; border-block:1px solid #aa895f; }
+.countdown-band::before,.countdown-band::after { content:""; position:absolute; z-index:-1; width:180px; height:220px; background:url("../images/botanical-spray.svg") center/contain no-repeat; opacity:.28; pointer-events:none; }
+.countdown-band::before { left:-38px; top:-55px; }
+.countdown-band::after { right:-40px; bottom:-75px; transform:scaleX(-1); }
+.countdown-band .container { position:relative; }
+.countdown-panel { max-width:800px; margin:0 auto; padding:.25rem 1rem; border:0; background:transparent; color:#f7eddc; box-shadow:none; transform:none; }
+.countdown-label { color:#dfc79e; font:500 .65rem/1.4 var(--font-body); letter-spacing:.2em; margin-bottom:.8rem; }
+.countdown-label span:last-child { color:#d4b98c; }
+.countdown-grid { gap:1rem; }
+.time-unit { gap:.35rem; }
+.time-unit strong { color:#fff7e9; font:400 clamp(1.8rem,3.5vw,2.6rem)/1 var(--font-display); }
+.time-unit span { color:#e3d1b3; font:500 .6rem/1.2 var(--font-body); letter-spacing:.13em; }
+.intro-band { padding:1.15rem 0; border-block:1px solid rgba(164,134,93,.25); background:#f1e9dc; color:#675348; }
+.intro-band-inner { grid-template-columns:auto 1fr auto; gap:1.2rem; }
+.big-spark { color:#a7895e; font:2.2rem/1 var(--font-display); }
+.intro-band p { color:#6a5447; font:italic 400 clamp(1rem,1.8vw,1.25rem)/1.5 var(--font-display); }
+.intro-band .scribble-arrow { opacity:.35; }
+.paper-card { border:1px solid rgba(164,134,93,.34); border-radius:1px; background:rgba(255,253,248,.7); box-shadow:none; }
+.paper-card h3 { color:var(--blue); font:400 1.7rem/1.15 var(--font-display); text-transform:none; }
+.paper-card p { color:#6b5a4f; }
+.card-tag { padding:0 0 .35rem; border-bottom:1px solid #c5ad86; background:transparent; color:#94764f; font:500 .63rem/1.4 var(--font-body); letter-spacing:.17em; transform:none; }
+.quick-grid { gap:1.25rem; }
+.quick-card,.quick-card:nth-child(n) { padding:1.3rem .65rem 1.5rem; border-width:1px 0 0; background:transparent; transform:none; }
+.quick-illustration { display:none; }
+.text-link { color:var(--blue); font:500 .88rem/1.5 var(--font-body); text-underline-offset:4px; text-decoration-color:#b99b70; }
+.btn,.btn-primary,.btn-coral {
+  min-height:45px; padding:.72rem 1.2rem; border:1px solid #aa895f; border-radius:3px; box-shadow:none;
+  font:500 .9rem/1.25 var(--font-body); letter-spacing:.035em; transition:background .16s ease,color .16s ease;
+}
+.btn { background:transparent; color:var(--blue); }
+.btn:hover { transform:none; background:#eee4d5; box-shadow:none; }
+.btn-primary,.site-nav .nav-rsvp { background:var(--blue); color:#fbf2e4; }
+.btn-primary:hover { background:#7c1a3a; color:white; }
+.btn-coral { background:#eee4d5; color:var(--blue); }
+
+/* INTERIOR HEADERS: centered burgundy stationery panels with corner botanicals. */
+.page-hero {
+  position:relative; isolation:isolate; overflow:hidden; min-height:250px;
+  padding:clamp(3.2rem,6vw,4.8rem) 0; border:0; border-bottom:1px solid #a88a61;
+  background:var(--blue); color:#f7eddc; text-align:center;
+}
+.page-hero .container { position:relative; z-index:1; }
+.page-hero::before,.page-hero::after {
+  content:""; position:absolute; z-index:0; width:clamp(175px,22vw,270px); height:clamp(215px,28vw,340px);
+  background:url("../images/botanical-spray.svg") center/contain no-repeat; opacity:.42; pointer-events:none;
+}
+.page-hero::before { top:-65px; right:-25px; transform:scaleX(-1) rotate(-5deg); }
+.page-hero::after { left:-25px; bottom:-110px; transform:rotate(7deg); }
+.page-hero .kicker,.page-hero .kicker::before { color:#d6bd91; }
+.page-hero .display-title { max-width:820px; margin:.65rem auto .9rem; color:#f5e8d2; font:400 clamp(2.7rem,5.8vw,4.8rem)/1.08 var(--font-display); letter-spacing:.035em; text-transform:none; }
+.page-hero .display-title .outline { -webkit-text-stroke-color:#d1b78d; }
+.page-hero .lede { max-width:650px; margin:0 auto; color:#eadcc7; }
+.page-hero-coral,.page-hero-lilac,.page-hero-mint { background:var(--blue); }
+
+/* THE DAY: an editorial timeline spanning the content width. */
+.details-layout { display:block; }
+.details-layout > div { width:min(900px,100%); margin:0 auto; }
+.timeline { border-top:1px solid #b89b70; }
+.timeline-item { grid-template-columns:112px 25px minmax(0,1fr); gap:1rem; padding:1.15rem 0; border-bottom:1px solid rgba(164,134,93,.25); }
+.timeline-time { color:var(--blue); font:400 1.18rem/1.25 var(--font-display); text-transform:none; }
+.timeline-marker { justify-content:center; }
+.timeline-marker::before { width:10px; height:10px; border:1px solid #9b784d; background:#8f1738; }
+.timeline-marker::after { background:rgba(167,135,91,.42); }
+.timeline-copy h3 { color:var(--blue); font:400 1.42rem/1.2 var(--font-display); text-transform:none; }
+.timeline-copy p { color:#69594f; margin-top:.25rem; }
+.side-note {
+  width:min(900px,100%); margin:2.5rem auto 0; padding:1.35rem 1.5rem;
+  display:grid; grid-template-columns:1fr 1.5fr auto; align-items:center; gap:.6rem 1.5rem;
+  border:1px solid #c0a47c; background:#f3ecdf; transform:none; box-shadow:none;
+}
+.side-note .card-tag { justify-self:start; }
+.side-note h3 { color:var(--blue); font:400 1.7rem/1.2 var(--font-display); text-transform:none; margin:0; }
+.side-note p { margin:0; color:#6a584e; font-size:.9rem; }
+.side-note .scribble { display:none; }
+#dress-code.section { background:#f1eadd !important; border-block:1px solid rgba(164,134,93,.35) !important; }
+#dress-code .display-title { color:var(--blue); font:400 clamp(2.8rem,5.5vw,4.5rem)/1.05 var(--font-display) !important; text-transform:none; }
+#dress-code .display-title .outline { -webkit-text-stroke-color:#ad8d61; }
+
+/* GETTING HERE: full-width venue photograph with an overlay title panel. */
+.travel-hero {
+  position:relative; isolation:isolate; display:flex; align-items:center; justify-content:flex-end;
+  min-height:clamp(330px,38vw,470px); padding:2rem max(5vw,calc((100vw - 1180px)/2));
+  overflow:hidden; background:#5d4337;
+}
+.travel-hero::after { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(25,20,18,.05) 20%,rgba(28,17,20,.18) 54%,rgba(23,9,17,.35)); pointer-events:none; }
+.travel-hero-image { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; object-position:center 55%; }
+.travel-hero-copy { position:relative; z-index:2; width:min(390px,100%); padding:2rem 2.15rem; border:1px solid #c5a879; background:var(--blue); color:#f6ecd9; box-shadow:0 12px 28px rgba(32,18,17,.18); }
+.travel-hero-copy .kicker,.travel-hero-copy .kicker::before { color:#d3b98e; }
+.travel-hero-copy .display-title { color:#f6ead3; font-size:clamp(2.7rem,4.5vw,4.1rem); line-height:1.03; }
+.travel-hero-copy .display-title .outline { -webkit-text-stroke-color:#d2b68b; }
+.travel-hero-copy .lede { color:#eee0ca; font-size:.95rem; }
+.venue-intro { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:1.4rem; align-items:center; padding:1.8rem 0 2rem; margin-bottom:1.2rem; border-bottom:1px solid rgba(164,134,93,.42); }
+.venue-details h2 { margin:.2rem 0; color:var(--blue); font:400 2rem/1.15 var(--font-display); }
+.venue-details p { margin:.15rem 0; color:#69584e; }
+.venue-details .photo-credit { margin-top:.5rem; color:#867665; font-size:.75rem; }
+.venue-actions { display:grid; gap:.7rem; justify-items:start; }
+.travel-grid { display:grid; grid-template-columns:1fr; gap:0; }
+.travel-card,.travel-card:nth-child(n) {
+  display:grid; grid-template-columns:64px minmax(0,1fr); align-items:start; min-height:0;
+  padding:1.2rem .4rem; gap:.15rem 1.1rem; border:0; border-top:1px solid rgba(164,134,93,.3);
+  background:transparent; transform:none; box-shadow:none;
+}
+.travel-card .icon-spot {
+  grid-column:1; grid-row:1 / span 5; display:grid; place-items:center; width:48px; height:48px;
+  margin:.1rem auto 0 0; border:1px solid #b99b70; border-radius:50%; background:#f0e8da;
+}
+.travel-card .icon-spot svg { width:25px; height:25px; stroke:var(--blue); }
+.travel-card .card-tag,.travel-card h3,.travel-card p { grid-column:2; }
+.travel-card .card-tag { justify-self:start; margin:0; }
+.travel-card h3 { margin:.08rem 0 .18rem; color:var(--blue); font:400 1.42rem/1.2 var(--font-display); text-transform:none; }
+.travel-card p { margin:.12rem 0; color:#67584e; font-size:.93rem; }
+
+/* FAQ: full-width paper accordion under its burgundy banner. */
+.faq-layout { display:block; width:min(900px,100%); margin-inline:auto; }
+.faq-list { border-top:1px solid #b99b70; }
+.faq-item { border-bottom:1px solid rgba(164,134,93,.34); }
+.faq-item summary { padding:1.1rem 3.2rem 1.1rem .15rem; color:var(--blue); font:400 1.18rem/1.38 var(--font-display); letter-spacing:.015em; }
+.faq-item summary::after { right:.3rem; width:27px; height:27px; border:1px solid #ac8d62; border-radius:50%; background:transparent; color:var(--blue); font:400 1.15rem/1 var(--font-body); }
+.faq-item[open] summary::after { background:var(--blue); color:#f8efe0; }
+.faq-answer { max-width:760px; padding:0 .4rem 1.15rem .15rem; color:#68584e; }
+.faq-answer a { color:var(--blue); text-decoration-color:#b99b70; }
+.faq-sticker { position:relative; isolation:isolate; overflow:hidden; width:min(540px,100%); margin:2.8rem auto 0; padding:1.7rem 2rem; border:1px solid #b99b70; background:var(--blue); color:#f5ead7; text-align:center; transform:none; box-shadow:none; }
+.faq-sticker::after { content:""; position:absolute; z-index:-1; right:-30px; bottom:-70px; width:150px; height:190px; background:url("../images/botanical-spray.svg") center/contain no-repeat; opacity:.25; pointer-events:none; }
+.faq-sticker .big-heart { color:#d7bd94; text-shadow:none; font-family:var(--font-display); }
+.faq-sticker h3 { color:#f2e5cf; font:400 1.8rem/1.2 var(--font-display); text-transform:none; }
+.faq-sticker p { color:#eadcc7; }
+
+/* RSVP: stationery card, fully contained top tab and visible botanical details. */
+main:has([data-rsvp-page]) { overflow:visible; }
+.rsvp-shell { position:relative; width:min(900px,calc(100% - 3rem)); margin:clamp(2.4rem,5vw,4.2rem) auto; overflow:visible; }
+.rsvp-paper {
+  position:relative; isolation:isolate; overflow:visible; min-height:350px;
+  padding:5rem clamp(1.5rem,5vw,3.2rem) clamp(2.2rem,4vw,3.2rem);
+  border:1px solid #b99b70; background-color:var(--blue); color:#f7eddd;
+  background-image:url("../images/botanical-spray.svg"); background-repeat:no-repeat;
+  background-position:-48px -52px; background-size:190px 220px;
+  box-shadow:0 14px 32px rgba(60,23,34,.12);
+}
+.rsvp-paper::before {
+  content:"YOU'RE ON THE LIST"; position:absolute; z-index:3; top:1rem; right:clamp(1rem,3vw,1.8rem);
+  max-width:calc(100% - 2rem); padding:.55rem .9rem;
+  border:1px solid #b99b70; background:#ead9b8; color:var(--blue);
+  font:500 .7rem/1.3 var(--font-body); letter-spacing:.16em;
+  transform:rotate(1.5deg); white-space:nowrap;
+}
+.rsvp-paper::after {
+  content:""; position:absolute; z-index:0; right:-5px; bottom:-12px; width:175px; height:205px;
+  background:url("../images/botanical-spray.svg") center/contain no-repeat; opacity:.24;
+  transform:scaleX(-1); pointer-events:none;
+}
+.rsvp-paper > * { position:relative; z-index:1; }
+.rsvp-paper .kicker,.rsvp-kicker { color:#dec69d; }
+.rsvp-paper .kicker::before { color:#dec69d; }
+.rsvp-title { max-width:680px; margin:.55rem 0 .85rem; color:#f6ead4; font:400 clamp(2.8rem,6.2vw,4.6rem)/1.03 var(--font-display); letter-spacing:.025em; text-transform:none; }
+.rsvp-paper [data-rsvp-loading] { color:#f6ead4; }
+.rsvp-paper .field-hint { color:#e7d8c2; }
+.rsvp-paper .rsvp-error { padding:0; border:0; background:transparent; color:#f3e8d7; }
+.rsvp-paper .rsvp-error .kicker { margin-bottom:.45rem; }
+.rsvp-paper .rsvp-error p { max-width:720px; }
+.rsvp-paper .rsvp-error [data-invalid-token] { color:#f2e5d3; }
+.rsvp-paper .demo-links { position:relative; z-index:1; }
+.rsvp-paper .demo-links a { border:1px solid #c4a87b; background:#fbf6ec; color:var(--blue); }
+.rsvp-paper .demo-links a:hover { background:#eee2ce; }
+.rsvp-paper [data-rsvp-content] { position:relative; z-index:1; }
+.rsvp-paper .party-count { padding:.35rem .75rem; border:1px solid #c4a87b; background:#ead9b8; color:var(--blue); font:500 .68rem/1.3 var(--font-body); letter-spacing:.12em; }
+.rsvp-paper .invite-note { padding:.9rem 1.1rem; border:0; border-left:2px solid #c6a675; background:rgba(255,249,235,.1); color:#f1e5d2; }
+.rsvp-paper form > p { color:#f2e8d8; }
+.guest-rsvp-card { padding:1rem 1.1rem; border:1px solid #c4a87b; background:#fbf7ef; color:#4b1727; }
+.guest-rsvp-name { color:var(--blue); font:400 1.5rem/1.2 var(--font-display); }
+.field-label { color:#5a4039; font:500 .88rem/1.4 var(--font-body); }
+.radio-pill { border:1px solid #bda681; border-radius:2px; background:#fffdf8; color:#4b1727; font-weight:500; }
+.radio-pill:has(input:checked) { background:#e8dfcf; border-color:#93724f; box-shadow:none; }
+.radio-pill input { accent-color:var(--blue); }
+.field select,.field input,.field textarea { border:1px solid #bda681; border-radius:2px; background:#fffdf8; color:#402b2a; }
+.meal-course-field { border:1px solid #e0d3bd; background:#fffdf8; }
+.form-status { color:#f2e5d1; }
+.form-error { color:#ffd5c8; }
+.form-footer .btn { background:#f7efdf; color:var(--blue); }
+.confirmation { border:1px solid #c4a87b; background:#f7f0e4; color:#4b1727; }
+.confirmation h2 { color:var(--blue); font:400 clamp(2rem,5vw,3rem)/1.1 var(--font-display); text-transform:none; }
+.confirmation-mark { border:1px solid #aa895f; background:#e6d8bd; color:var(--blue); }
+.reference-code { border:1px solid #b99b70; background:white; color:var(--blue); }
+
+/* Shared footer and closing band. */
+.closing-band { position:relative; isolation:isolate; overflow:hidden; padding:clamp(3rem,5.5vw,4.8rem) 0; border-top:1px solid #ac8c62; background:var(--blue); color:#f5ead8; text-align:center; }
+.closing-band::before,.closing-band::after { content:""; position:absolute; z-index:-1; width:215px; height:250px; background:url("../images/botanical-spray.svg") center/contain no-repeat; opacity:.3; pointer-events:none; }
+.closing-band::before { left:-45px; top:-85px; }
+.closing-band::after { right:-45px; bottom:-100px; transform:scaleX(-1); }
+.closing-band h2 { margin:0; color:#f4e7d1; font:400 clamp(2.8rem,5.8vw,4.5rem)/1.05 var(--font-display); letter-spacing:.025em; text-transform:none; }
+.closing-band p { color:#eadcc8; font:italic 400 1.05rem/1.5 var(--font-display); }
+.closing-band .btn { background:#f7f0e4; color:var(--blue); }
+.site-footer { padding:1.6rem 0; border-top:1px solid rgba(164,134,93,.35); background:#f0e8db; color:var(--blue); }
+.footer-brand { color:var(--blue); font:400 1.35rem/1.15 var(--font-display); text-transform:none; }
+.footer-inner p { color:#78695d; font:400 .8rem/1.45 var(--font-body); }
+.footer-links a { color:var(--blue); font:400 .86rem/1.4 var(--font-body); }
+
+/* Responsive: keep photo frames, timeline, RSVP tab and botanicals inside the viewport. */
+@media (max-width:860px) {
+  .nav-wrap { min-height:68px; }
+  .hero-grid { grid-template-columns:minmax(0,1fr) minmax(280px,.95fr); gap:1.4rem; }
+  .hero-art { min-height:355px; }
+  .hero-photo { height:335px; width:90%; left:3%; }
+  .side-note { grid-template-columns:1fr 1.4fr; }
+}
+@media (max-width:640px) {
+  .container,.nav-wrap { width:min(100% - 1.5rem,1180px); }
+  .nav-wrap { min-height:66px; }
+  .brand-mark { width:38px; height:38px; }
+  .brand-copy { font-size:.84rem; }
+  .site-nav { background:var(--paper); border-bottom:1px solid #b99b70; box-shadow:0 12px 24px rgba(49,20,27,.1); }
+  .site-nav .nav-rsvp { text-align:center; }
+  .hero { padding:2.5rem 0 1.7rem; }
+  .hero-grid { grid-template-columns:1fr; gap:.45rem; }
+  .hero-title { font-size:clamp(3.8rem,17vw,5.7rem); line-height:.98; margin:1rem 0; }
+  .hero-title .amp { margin-left:.65rem; }
+  .hero-art { min-height:310px; margin:1rem 0 .2rem; }
+  .hero-photo { top:1%; left:6%; width:88%; height:285px; }
+  .hero::before { top:-25px; left:-105px; width:185px; height:245px; opacity:.38; }
+  .hero::after { right:-115px; bottom:-25px; width:190px; height:250px; opacity:.4; }
+  .button-row { gap:.65rem; }
+  .button-row .btn { flex:1 1 auto; }
+  .countdown-band { padding:1.25rem 0; }
+  .countdown-band::before,.countdown-band::after { width:115px; height:150px; opacity:.2; }
+  .countdown-panel { padding:.1rem 0; }
+  .countdown-label { font-size:.58rem; }
+  .countdown-grid { gap:.35rem; }
+  .time-unit { display:grid; gap:.12rem; }
+  .time-unit strong { font-size:1.65rem; }
+  .time-unit span { font-size:.53rem; }
+  .intro-band { padding:1rem 0; }
+  .intro-band-inner { grid-template-columns:auto 1fr; gap:.7rem; }
+  .intro-band .scribble-arrow { display:none; }
+  .section-heading { align-items:start; flex-direction:column; gap:.6rem; }
+  .quick-grid,.travel-grid { grid-template-columns:1fr; }
+  .quick-card { padding-inline:.05rem; }
+  .page-hero { min-height:220px; padding:2.8rem 0 2.4rem; }
+  .page-hero .display-title { font-size:clamp(2.6rem,12vw,4rem); }
+  .page-hero::before { width:150px; height:185px; right:-40px; top:-50px; opacity:.32; }
+  .page-hero::after { width:145px; height:185px; left:-55px; bottom:-80px; opacity:.3; }
+  .timeline-item { grid-template-columns:72px 15px minmax(0,1fr); gap:.45rem; padding:.9rem 0; }
+  .timeline-time { font-size:.96rem; }
+  .timeline-copy h3 { font-size:1.18rem; }
+  .timeline-copy p { font-size:.88rem; }
+  .side-note { grid-template-columns:1fr; gap:.35rem; margin-top:1.7rem; }
+  .travel-hero { min-height:410px; align-items:end; justify-content:center; padding:1.2rem .75rem; }
+  .travel-hero-copy { width:min(420px,100%); padding:1.4rem 1.2rem; }
+  .travel-hero-copy .display-title { font-size:2.8rem; }
+  .venue-intro { grid-template-columns:1fr; gap:1rem; padding:1.4rem 0; }
+  .venue-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.9rem; }
+  .travel-card,.travel-card:nth-child(n) { grid-template-columns:50px minmax(0,1fr); padding:1rem 0; gap:.15rem .7rem; }
+  .travel-card .icon-spot { width:42px; height:42px; }
+  .faq-layout { width:100%; }
+  .faq-item summary { font-size:1.08rem; }
+  .faq-sticker { width:100%; padding:1.4rem 1rem; }
+  .rsvp-shell { width:calc(100% - 1.5rem); margin:2.3rem auto; }
+  .rsvp-paper { min-height:0; padding:4.5rem 1.15rem 2rem; background-size:115px 140px; background-position:-35px -34px; }
+  .rsvp-paper::before { top:.85rem; right:.8rem; max-width:calc(100% - 1.6rem); padding:.45rem .6rem; font-size:.58rem; letter-spacing:.12em; }
+  .rsvp-paper::after { width:115px; height:140px; right:-6px; bottom:-8px; }
+  .rsvp-title { font-size:clamp(2.4rem,12vw,3.5rem); }
+  .guest-rsvp-card { padding:.8rem; }
+  .guest-meal-fields { grid-template-columns:1fr; }
+  .radio-pill { width:100%; }
+  .form-footer .btn { width:100%; }
+  .footer-inner { align-items:flex-start; flex-direction:column; }
+  .footer-links { gap:.7rem 1rem; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
