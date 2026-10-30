@@ -902,9 +902,9 @@ main { overflow:visible; }
   min-height:clamp(330px,38vw,470px); padding:2rem max(5vw,calc((100vw - 1180px)/2));
   overflow:hidden; background:#5d4337;
 }
-.travel-hero::after { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(90deg,rgba(25,20,18,.05) 20%,rgba(28,17,20,.18) 54%,rgba(23,9,17,.35)); pointer-events:none; }
-.travel-hero-image { position:absolute; inset:0; z-index:-1; width:100%; height:100%; object-fit:cover; object-position:center 55%; }
-.travel-hero-copy { position:relative; z-index:1; width:min(390px,100%); padding:2rem 2.15rem; border:1px solid #c5a879; background:var(--blue); color:#f6ecd9; box-shadow:0 12px 28px rgba(32,18,17,.18); }
+.travel-hero::after { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(25,20,18,.05) 20%,rgba(28,17,20,.18) 54%,rgba(23,9,17,.35)); pointer-events:none; }
+.travel-hero-image { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; object-position:center 55%; }
+.travel-hero-copy { position:relative; z-index:2; width:min(390px,100%); padding:2rem 2.15rem; border:1px solid #c5a879; background:var(--blue); color:#f6ecd9; box-shadow:0 12px 28px rgba(32,18,17,.18); }
 .travel-hero-copy .kicker,.travel-hero-copy .kicker::before { color:#d3b98e; }
 .travel-hero-copy .display-title { color:#f6ead3; font-size:clamp(2.7rem,4.5vw,4.1rem); line-height:1.03; }
 .travel-hero-copy .display-title .outline { -webkit-text-stroke-color:#d2b68b; }
