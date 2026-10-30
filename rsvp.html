@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fff8eb"><meta name="referrer" content="no-referrer">
   <meta name="description" content="A personalised RSVP page for Sheila and Lance's wedding">
-  <title>Your RSVP — Sheila &amp; Lance</title><link rel="icon" href="./assets/images/brand-favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/css/styles.css?v=20261030-2">
+  <title>Your RSVP — Sheila &amp; Lance</title><link rel="icon" href="./assets/images/brand-favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./assets/css/styles.css?v=20261030-3">
   <script type="module" src="./assets/js/site.js"></script>
   <script type="module" src="./assets/js/rsvp.js"></script>
 </head>
@@ -30,13 +30,13 @@
         </div>
         <div data-rsvp-content hidden>
           <span class="kicker rsvp-kicker">A tiny bit of admin, a lot of love</span>
-          <h1 class="rsvp-title" id="rsvp-heading">Hey, <span data-party-name></span>.</h1>
+          <h1 class="rsvp-title" id="rsvp-heading">Hey, <span data-contact-name></span>.</h1>
           <span class="party-count" data-party-count></span>
           <p class="invite-note" data-invite-note></p>
           <form data-rsvp-form novalidate>
             <p data-rsvp-instructions>Can you make it? Let us know for everyone listed below. If you're joining us for the full day, choose a starter, main course and dessert.</p>
             <div class="guest-rsvp-list" data-rsvp-guests></div>
-            <div class="field"><label class="field-label" for="dietary-notes">Food allergies, dietary needs or a note for us</label><textarea id="dietary-notes" name="dietary-notes" maxlength="1000" placeholder="Anything we should know? (Optional)"></textarea><span class="field-hint"><span data-dietary-hint>Please include anything important for catering or access. This prototype stores notes only in this browser.</span></span></div>
+            <div class="field"><label class="field-label" for="dietary-notes">Food allergies or dietary requirements</label><textarea id="dietary-notes" name="dietary-notes" maxlength="1000" placeholder="Anything the caterers should know? (Optional)"></textarea><span class="field-hint"><span data-dietary-hint>Please include anything important for catering or access. This prototype stores notes only in this browser.</span></span></div>
             <p class="form-status" data-rsvp-status role="status" aria-live="polite"></p>
             <div class="form-footer"><button class="btn btn-primary" type="submit" data-rsvp-submit>Send RSVP <span aria-hidden="true">↗</span></button><span class="field-hint" data-rsvp-mode-hint>Demo only. Your response will not be sent to the couple.</span></div>
           </form>

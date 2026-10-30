@@ -50,7 +50,7 @@ async function initRsvp(pageRoot) {
   if (dietaryHint) {
     dietaryHint.textContent = isMockMode
       ? "This prototype stores notes only in this browser."
-      : "Please share only information needed for catering or accessibility.";
+      : "Please include any food allergies or dietary requirements.";
   }
 
   let result;
@@ -82,7 +82,7 @@ async function initRsvp(pageRoot) {
   const invitationType = String(invitation.invitationType || "FULL_DAY").trim().toUpperCase();
   const eveningOnly = invitationType === "EVENING_ONLY";
   content.hidden = false;
-  pageRoot.querySelector("[data-party-name]").textContent = invitation.partyName;
+  pageRoot.querySelector("[data-contact-name]").textContent = String(invitation.contactName || "Friend").trim() || "Friend";
   const childCount = invitation.guests.filter((guest) => normaliseGuestType(guest.guestType) === "CHILD").length;
   const guestCountLabel = `${invitation.guests.length} ${invitation.guests.length === 1 ? "guest" : "guests"} invited`;
   pageRoot.querySelector("[data-party-count]").textContent = childCount
@@ -98,7 +98,7 @@ async function initRsvp(pageRoot) {
         : "Can you make it? Let us know for everyone listed below. If you're joining us for the full day, choose a starter, main course and dessert.";
   }
   const dietaryLabel = pageRoot.querySelector('label[for="dietary-notes"]');
-  if (dietaryLabel && eveningOnly) dietaryLabel.textContent = "Any dietary notes or a note for us (optional)";
+  if (dietaryLabel && eveningOnly) dietaryLabel.textContent = "Any food allergies or dietary requirements?";
 
   if (result.submitted) {
     form.hidden = true;
