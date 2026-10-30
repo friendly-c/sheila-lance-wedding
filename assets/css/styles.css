@@ -165,6 +165,7 @@ main { overflow: clip; }
 .travel-card .icon-spot svg { width: 32px; height: 32px; }
 .map-placeholder { position: relative; overflow: hidden; border: 2px solid var(--ink); box-shadow: var(--shadow); background: var(--mint); }
 .map-placeholder img { width: 100%; height: auto; }
+.map-placeholder img.venue-photo { display: block; width: 100%; height: clamp(230px, 38vw, 440px); object-fit: cover; object-position: center 54%; }
 .map-note { padding: .75rem 1rem; border-top: 2px solid var(--ink); background: white; font-size: .85rem; }
 .notice { padding: 1rem 1.2rem; border-left: 5px solid var(--blue); background: rgba(49,88,255,.08); }
 

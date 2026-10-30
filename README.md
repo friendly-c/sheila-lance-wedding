@@ -1,4 +1,4 @@
-# All the Love Club — wedding website prototype
+# Sheila & Lance — wedding website
 
 A mobile-first, scrapbook-inspired wedding website built with plain HTML, CSS and vanilla JavaScript. It has no build step, package manager, paid service, external font, external image service or third-party runtime dependency.
 
