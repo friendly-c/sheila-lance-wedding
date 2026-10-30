@@ -2,15 +2,15 @@
 
 A mobile-first, scrapbook-inspired wedding website built with plain HTML, CSS and vanilla JavaScript. It has no build step, package manager, paid service, external font, external image service or third-party runtime dependency.
 
-> **Content status:** Some venue, timetable, travel and menu copy remains placeholder and needs the couple's confirmation before launch. The live RSVP page is configured to use Google Apps Script; it validates unique invitation tokens and records responses in the private Google Sheet. Sample invitation links on the RSVP error state are available only in mock mode. Production guest links come from the private `Invitations` sheet.
+> **Content status:** The venue and core travel details are confirmed for The Mill at Elstead. Public transport is limited, so guests should check operator timetables nearer the date and arrange their own return journey. Other page content, including contact and menu details, may still need the couple's review. The live RSVP page is configured to use Google Apps Script; it validates unique invitation tokens and records responses in the private Google Sheet. Sample invitation links on the RSVP error state are available only in mock mode. Production guest links come from the private `Invitations` sheet.
 
 ## What's included
 
 ```text
 wedding-website-prototype/
 ├── index.html                 # Home, welcome and live countdown
-├── details.html               # Schedule, venue placeholder and dress code
-├── travel.html                # Transport, parking and accommodation placeholders
+├── details.html               # Schedule, confirmed venue details and dress code
+├── travel.html                # Confirmed directions, parking and transport guidance
 ├── faqs.html                  # Keyboard-accessible native FAQ accordions
 ├── rsvp.html                  # Personalised full-day / evening RSVP form
 ├── README.md
