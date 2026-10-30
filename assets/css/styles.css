@@ -153,8 +153,6 @@ main { overflow: clip; }
 .side-note h3 { margin: 0 0 .7rem; font: 2rem/.95 var(--font-display); text-transform: uppercase; }
 .side-note .scribble { display: block; width: 88px; margin-left: auto; }
 .side-note.yellow { background: var(--yellow); }
-.dress-code { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1rem 0; }
-.swatch { width: 35px; height: 35px; border: 2px solid var(--ink); border-radius: 50%; }
 
 .travel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
 .travel-card { min-height: 225px; }
