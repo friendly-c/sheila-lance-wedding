@@ -110,3 +110,5 @@ For backend deployment and spreadsheet schema details, use the accompanying chil
 
 
 The visual system follows the couple's botanical invitation: ivory paper, deep burgundy, antique gold, restrained serif typography and botanical corner motifs. The home countdown is a full-width band, the running order is an editorial timeline, the venue photograph is the Getting here masthead, and the RSVP form sits inside an invitation panel.
+
+The browser favicon is the burgundy-and-antique-gold S+L monogram in `assets/images/brand-favicon.svg`. The homepage photograph uses an exterior image published on The Mill at Elstead's official website.

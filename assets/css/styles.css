@@ -1087,3 +1087,10 @@ main:has([data-rsvp-page]) { overflow:visible; }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
 }
+
+
+/* Dress-code heading contrast: retain antique gold, remove the pale outline effect. */
+#dress-code .display-title .outline {
+  color: #80603f;
+  -webkit-text-stroke: 0;
+}
