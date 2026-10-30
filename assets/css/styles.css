@@ -1092,3 +1092,22 @@ main:has([data-rsvp-page]) { overflow:visible; }
   color: #80603f;
   -webkit-text-stroke: 0;
 }
+
+
+/* RSVP guest-name QA: keep fieldset legends fully visible above each guest's choices. */
+.guest-rsvp-card { min-width: 0; overflow: visible; padding-top: 1.35rem; }
+.guest-rsvp-card legend {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: .55rem;
+  float: left; width: 100%; margin: 0 0 .95rem; padding: .2rem .1rem .35rem; line-height: 1.35;
+}
+.guest-rsvp-card legend + * { clear: both; }
+.guest-rsvp-name {
+  display: inline-block; min-width: 0; margin: 0; color: var(--blue);
+  font: 400 1.4rem/1.3 var(--font-display); overflow-wrap: anywhere;
+}
+.guest-type-tag { flex: 0 0 auto; align-self: center; }
+@media (max-width: 640px) {
+  .guest-rsvp-card { padding-top: 1.2rem; }
+  .guest-rsvp-card legend { margin-bottom: .8rem; }
+  .guest-rsvp-name { font-size: 1.25rem; }
+}

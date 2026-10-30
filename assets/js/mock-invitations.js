@@ -2,6 +2,7 @@
 export const mockInvitations = {
   "demo-olive-finch": {
     partyName: "Olive & Noah Finch",
+    contactName: "Olive",
     guests: [
       { id: "olive-finch", name: "Olive Finch", guestType: "ADULT" },
       { id: "noah-finch", name: "Noah Finch", guestType: "ADULT" },
@@ -11,12 +12,14 @@ export const mockInvitations = {
   },
   "demo-river-james": {
     partyName: "River James",
+    contactName: "River",
     guests: [{ id: "river-james", name: "River James", guestType: "ADULT" }],
     note: "Your invitation is just for you — we've saved you a seat at the table.",
     invitationType: "FULL_DAY",
   },
   "demo-morgan-park": {
     partyName: "Morgan & Taylor Park",
+    contactName: "Morgan",
     guests: [
       { id: "morgan-park", name: "Morgan Park", guestType: "ADULT" },
       { id: "taylor-park", name: "Taylor Park", guestType: "ADULT" },
@@ -26,12 +29,14 @@ export const mockInvitations = {
   },
   "demo-evening-invite": {
     partyName: "Evening Test Party",
+    contactName: "Evening Guest",
     guests: [{ id: "evening-test-guest", name: "Evening Test Guest", guestType: "ADULT" }],
     note: "We'd love you to join us for the evening celebration.",
     invitationType: "EVENING_ONLY",
   },
   "demo-family-with-child": {
     partyName: "Morgan Family",
+    contactName: "Morgan",
     guests: [
       { id: "morgan-parent", name: "Morgan Parent", guestType: "ADULT" },
       { id: "morgan-child", name: "Morgan Child", guestType: "CHILD" },
