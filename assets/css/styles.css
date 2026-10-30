@@ -408,7 +408,7 @@ main { overflow: clip; }
 .hero::before {
   content: ""; position: absolute; z-index: -1; top: -80px; right: -75px;
   width: clamp(250px, 36vw, 490px); height: clamp(310px, 43vw, 570px);
-  background: url("./assets/images/botanical-spray.svg") center / contain no-repeat;
+  background: url("../images/botanical-spray.svg") center / contain no-repeat;
   opacity: .78; pointer-events: none;
 }
 .hero-grid { grid-template-columns: minmax(0, .92fr) minmax(340px, 1.08fr); gap: clamp(2.5rem, 6vw, 5.5rem); }
@@ -495,12 +495,12 @@ main { overflow: clip; }
 .page-hero::before {
   content: ""; position: absolute; z-index: -1; right: -50px; top: -105px;
   width: clamp(245px, 34vw, 430px); height: clamp(290px, 39vw, 490px);
-  background: url("./assets/images/botanical-spray.svg") center / contain no-repeat;
+  background: url("../images/botanical-spray.svg") center / contain no-repeat;
   opacity: .34; pointer-events: none;
 }
 .page-hero::after {
   content: ""; position: absolute; right: auto; left: -100px; bottom: -180px;
-  width: 300px; height: 360px; border: 0; background: url("./assets/images/botanical-spray.svg") center / contain no-repeat;
+  width: 300px; height: 360px; border: 0; background: url("../images/botanical-spray.svg") center / contain no-repeat;
   opacity: .2; transform: scaleX(-1) rotate(14deg); pointer-events: none;
 }
 .page-hero .kicker { color: #d4b98d; }
@@ -585,7 +585,7 @@ main { overflow: clip; }
 }
 .faq-sticker::after {
   content: ""; position: absolute; right: -65px; bottom: -80px; width: 210px; height: 250px;
-  background: url("./assets/images/botanical-spray.svg") center / contain no-repeat;
+  background: url("../images/botanical-spray.svg") center / contain no-repeat;
   opacity: .28; pointer-events: none;
 }
 .faq-sticker .big-heart { color: #d5b78a; text-shadow: none; font-family: var(--font-display); }
@@ -672,7 +672,7 @@ main { overflow: clip; }
 }
 .closing-band::before, .closing-band::after {
   content: ""; position: absolute; z-index: -1; width: 250px; height: 300px;
-  background: url("./assets/images/botanical-spray.svg") center / contain no-repeat;
+  background: url("../images/botanical-spray.svg") center / contain no-repeat;
   opacity: .34; pointer-events: none;
 }
 .closing-band::before { left: -70px; top: -90px; }

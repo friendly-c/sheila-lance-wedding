@@ -21,7 +21,8 @@ wedding-website-prototype/
     ├── images/
     │   ├── flower-doodle.svg
     │   ├── hero-couple.svg
-    │   ├── botanical-spray.svg\n│   ├── map-scribble.svg
+    │   ├── botanical-spray.svg
+│   ├── map-scribble.svg
     │   ├── rings-doodle.svg
     │   └── sun-scribble.svg
     └── js/
