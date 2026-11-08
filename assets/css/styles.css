@@ -1166,9 +1166,9 @@ main { overflow: visible; }
 .hero-invitation .btn-primary { background: #f3e8d3; color: var(--blue); }
 .hero-invitation .btn-light { background: transparent; }
 .hero-invitation .btn:hover { background: #e8d9bf; color: var(--blue); }
-.hero-art { position: relative; width: min(100%,455px); min-height: 0; aspect-ratio: 978 / 1212; margin: 0 auto; isolation: isolate; }
-.hero-couple-photo { position: absolute; z-index: 1; top: 18%; left: 9%; width: 82%; height: 67%; object-fit: cover; object-position: center 43%; }
-.hero-floral-frame { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.hero-art { position: relative; width: min(100%,500px); min-height: 0; aspect-ratio: 1000 / 914; margin: 0 auto; isolation: isolate; }
+.hero-couple-photo { position: absolute; z-index: 2; top: 15.5%; left: 18.8%; width: 62%; height: 69%; object-fit: cover; object-position: center 50%; border: 2px solid #c8ad80; box-shadow: 0 5px 16px rgba(61,37,34,.1); }
+.hero-floral-frame { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .countdown-band { padding: 1.5rem 0; background: var(--blue); border-block: 1px solid #a98960; }
 .countdown-band::before,.countdown-band::after { content: none; }
 .countdown-panel { max-width: 780px; margin: 0 auto; padding: .2rem .5rem; border: 0; background: transparent; box-shadow: none; transform: none; color: #f7eddd; }
