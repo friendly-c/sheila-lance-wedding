@@ -1253,3 +1253,11 @@ main { overflow: visible; }
   .faq-item summary { font-size: 1.05rem; }
   .rsvp-shell { width: calc(100% - 1.5rem); }
 }
+
+
+/* Use the couple's watercolour frame as the hero decoration; remove the previous SVG sprays. */
+.hero-invitation::before,
+.hero-invitation::after {
+  content: none;
+  display: none;
+}
