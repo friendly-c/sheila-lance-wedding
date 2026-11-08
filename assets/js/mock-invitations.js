@@ -7,7 +7,7 @@ export const mockInvitations = {
       { id: "olive-finch", name: "Olive Finch", guestType: "ADULT" },
       { id: "noah-finch", name: "Noah Finch", guestType: "ADULT" },
     ],
-    note: "Two seats, one very good dance floor. We can't wait to see you.",
+    note: "Two seats and a lovely day ahead. We can't wait to see you.",
     invitationType: "FULL_DAY",
   },
   "demo-river-james": {

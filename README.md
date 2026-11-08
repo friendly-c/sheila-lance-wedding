@@ -80,7 +80,7 @@ All page links, scripts, styles and local SVG references use relative paths (for
 - **Couple, date and venue:** edit `assets/js/site-config.js`. Change `dateISO` to an ISO-8601 date/time with the correct local time-zone offset; it drives the countdown.
 - **Page text and schedule:** edit the relevant `.html` page. Replace placeholder schedule, dress-code, travel, accessibility and FAQ details with confirmed information.
 - **Colours, layouts and type:** edit the CSS variables at the top of `assets/css/styles.css`. The invitation-inspired design uses system serif fonts and local botanical SVG artwork.
-- **Artwork and photography:** replace the SVGs in `assets/images/` with your own optimised local images, retaining filenames or updating their references in the HTML/CSS. The homepage and travel page use a photograph hosted by The Mill at Elstead's official website. The botanical decoration is editable local SVG artwork.
+- **Artwork and photography:** replace the SVGs in `assets/images/` with your own optimised local images, retaining filenames or updating their references in the HTML/CSS. The homepage uses the couple's supplied portrait with their watercolour floral frame and wordmark. The travel page retains the official venue photograph. The botanical decoration is editable local SVG artwork.
 - **Invitation samples:** edit `assets/js/mock-invitations.js`. Keep it fictional until the real RSVP integration is built; don't publish a real guest list or private guest data to a public repository.
 
 ## Live RSVP and spreadsheet integration
@@ -112,3 +112,6 @@ For backend deployment and spreadsheet schema details, use the accompanying chil
 The visual system follows the couple's botanical invitation: ivory paper, deep burgundy, antique gold, restrained serif typography and botanical corner motifs. The home countdown is a full-width band, the running order is an editorial timeline, the venue photograph is the Getting here masthead, and the RSVP form sits inside an invitation panel.
 
 The browser favicon is the burgundy-and-antique-gold S+L monogram in `assets/images/brand-favicon.svg`. The homepage photograph uses an exterior image published on The Mill at Elstead's official website.
+
+## Typography
+Cardo is loaded from Google Fonts. The display font stack prefers Coldiac if a licensed webfont is added locally; the public Coldiac demo is marked personal-use only, so the site currently falls back to Cardo until a licensed Coldiac WOFF2 is supplied.

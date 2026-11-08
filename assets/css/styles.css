@@ -1111,3 +1111,145 @@ main:has([data-rsvp-page]) { overflow:visible; }
   .guest-rsvp-card legend { margin-bottom: .8rem; }
   .guest-rsvp-name { font-size: 1.25rem; }
 }
+
+
+/* Designer refresh — Cardo typography, invitation-led layout and supplied watercolour artwork. */
+:root {
+  --font-display: "Coldiac", "Cardo", Georgia, serif;
+  --font-body: "Cardo", Georgia, serif;
+  --paper: #f8f4ec; --paper-deep: #eee5d7; --ink: #4b1727;
+  --blue: #650d2d; --blue-dark: #4b0922; --coral: #a98960;
+  --yellow: #c8ad80; --line: rgba(105,65,58,.22);
+}
+body { font-family: var(--font-body); background: var(--paper); color: #463834; }
+main { overflow: visible; }
+.top-ticker { display: none !important; }
+.site-header { background: #f8f4ec; border-bottom: 1px solid rgba(160,129,91,.35); }
+.site-nav a { font: 400 .95rem/1.3 var(--font-body); letter-spacing: .02em; }
+.site-nav .nav-rsvp { border: 1px solid #a98960; border-radius: 2px; background: var(--blue); box-shadow: none; color: #f7eddd; }
+.brand { letter-spacing: .02em; }
+.brand-mark { width: 42px; height: 42px; border: 1px solid #b99b70; border-radius: 50%; background: var(--blue); color: #ead9b9; box-shadow: none; transform: none; font: 1rem/1 var(--font-display); }
+.brand-copy { color: var(--blue); font: 500 .94rem/1.1 var(--font-display); letter-spacing: .08em; }
+.brand-copy small { color: #806b54; font: 500 .58rem/1.1 var(--font-body); letter-spacing: .17em; }
+.kicker::before { content: none; }
+.kicker { color: #9a7a57; font: 400 .7rem/1.4 var(--font-body); letter-spacing: .16em; }
+.display-title { color: var(--blue); font: 400 clamp(2.8rem,6vw,5rem)/1.08 var(--font-display); text-transform: none; letter-spacing: .015em; }
+.display-title .outline { color: inherit; -webkit-text-stroke: 0; }
+.lede { font: 400 clamp(1rem,1.5vw,1.16rem)/1.65 var(--font-body); color: #5d4d45; }
+.section { padding: clamp(3rem,6vw,5rem) 0; }
+.section-heading { margin-bottom: 1.5rem; }
+.section-heading h2 { color: var(--blue); font: 400 clamp(2rem,4vw,3.4rem)/1.12 var(--font-display); text-transform: none; }
+.section-heading p { color: #766459; font: 400 1rem/1.6 var(--font-body); max-width: none; }
+.btn,.btn-primary,.btn-coral {
+  min-height: 45px; padding: .72rem 1.25rem; border: 1px solid #aa895f;
+  border-radius: 2px; box-shadow: none; font: 400 .95rem/1.25 var(--font-body);
+  letter-spacing: .025em; transition: background .16s ease,color .16s ease;
+}
+.btn { background: transparent; color: var(--blue); }
+.btn:hover { transform: none; background: #eee4d5; box-shadow: none; }
+.btn-primary,.site-nav .nav-rsvp { background: var(--blue); color: #fbf2e4; }
+.btn-primary:hover { background: #7c1a3a; color: white; }
+
+/* Home: supplied logo on burgundy stationery, with supplied portrait inside the watercolour frame. */
+.hero-invitation { padding: clamp(2.3rem,5vw,4rem) 0; background: var(--paper); }
+.hero-invitation .hero-grid { grid-template-columns: minmax(0,1fr) minmax(320px,.95fr); gap: clamp(2rem,5vw,4.5rem); align-items: center; }
+.hero-invitation .hero-copy {
+  padding: clamp(1.5rem,4vw,2.7rem); background: var(--blue);
+  border: 1px solid #c8ad80; box-shadow: 0 12px 28px rgba(60,23,34,.1); color: #f7eddd;
+}
+.hero-wordmark { display: block; width: min(100%,570px); height: auto; margin: 0 auto 1.2rem; }
+.hero-invitation .lede { color: #f0e4d0; max-width: 500px; font-size: clamp(1.05rem,1.7vw,1.24rem); }
+.hero-invitation .hero-date { display: block; margin: 1.25rem 0 .3rem; color: #dec69d; font: 400 .78rem/1.4 var(--font-body); letter-spacing: .16em; text-transform: uppercase; }
+.hero-venue { color: #e8d8bd; font: 400 .9rem/1.45 var(--font-body); letter-spacing: .05em; }
+.hero-invitation .button-row { gap: .7rem; margin-top: 1.3rem; }
+.hero-invitation .btn { border-color: #c8ad80; color: #f8efdf; }
+.hero-invitation .btn-primary { background: #f3e8d3; color: var(--blue); }
+.hero-invitation .btn-light { background: transparent; }
+.hero-invitation .btn:hover { background: #e8d9bf; color: var(--blue); }
+.hero-art { position: relative; width: min(100%,455px); min-height: 0; aspect-ratio: 978 / 1212; margin: 0 auto; isolation: isolate; }
+.hero-couple-photo { position: absolute; z-index: 1; top: 18%; left: 9%; width: 82%; height: 67%; object-fit: cover; object-position: center 43%; }
+.hero-floral-frame { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.countdown-band { padding: 1.5rem 0; background: var(--blue); border-block: 1px solid #a98960; }
+.countdown-band::before,.countdown-band::after { content: none; }
+.countdown-panel { max-width: 780px; margin: 0 auto; padding: .2rem .5rem; border: 0; background: transparent; box-shadow: none; transform: none; color: #f7eddd; }
+.countdown-label { color: #e1cda9; font: 400 .72rem/1.4 var(--font-body); letter-spacing: .16em; text-transform: uppercase; }
+.countdown-grid { gap: 1rem; }
+.time-unit strong { color: #fff8ed; font: 400 clamp(1.7rem,3.3vw,2.5rem)/1 var(--font-display); }
+.time-unit span { color: #dfc8a2; font: 400 .64rem/1.2 var(--font-body); }
+.home-details { padding-top: clamp(2.7rem,5vw,4rem); }
+.quick-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.1rem; }
+.quick-card,.quick-card:nth-child(n) { padding: 1.5rem; border: 1px solid rgba(164,134,93,.38); border-radius: 0; background: rgba(255,253,248,.72); box-shadow: none; transform: none; }
+.quick-card h3 { color: var(--blue); font: 400 1.65rem/1.2 var(--font-display); text-transform: none; }
+.quick-card p { color: #68584e; font: 400 .98rem/1.6 var(--font-body); }
+.quick-illustration { display: none; }
+.home-location-links { display: grid; gap: .45rem; margin-top: .8rem; }
+.text-link { color: var(--blue); font: 400 .9rem/1.45 var(--font-body); text-underline-offset: 4px; text-decoration-color: #b99b70; }
+.home-faqs { background: #f0e8dc; }
+.home-faqs .section-heading { display: flex; justify-content: space-between; align-items: end; }
+.home-faq-more { margin-top: 1.4rem; text-align: right; }
+
+/* Interior pages: simple title panels, no breadcrumbs or outlined display type. */
+.page-hero { min-height: 0; padding: clamp(2.5rem,5vw,3.8rem) 0; background: var(--blue); text-align: center; border-bottom: 1px solid #ad8d62; }
+.page-hero .display-title { margin: .2rem auto; color: #f5e8d2; font: 400 clamp(2.8rem,5.5vw,4.7rem)/1.08 var(--font-display); text-transform: none; }
+.page-hero .lede { margin: .65rem auto 0; color: #eadcc7; }
+.page-hero::before,.page-hero::after { content: none; }
+.timeline-date { margin: 0 0 1rem; color: #927450; font: 400 .8rem/1.4 var(--font-body); letter-spacing: .16em; text-transform: uppercase; text-align: center; }
+.details-layout { display: block; }
+.details-timeline-wrap { width: min(900px,100%); margin: 0 auto; }
+.timeline { border-top: 1px solid #b89b70; }
+.timeline-item { grid-template-columns: 110px 24px minmax(0,1fr); gap: .9rem; padding: 1.1rem 0; border-bottom: 1px solid rgba(164,134,93,.25); }
+.timeline-time { color: var(--blue); font: 400 1.15rem/1.3 var(--font-display); text-transform: none; }
+.timeline-marker::before { width: 9px; height: 9px; border: 1px solid #9b784d; background: #8f1738; }
+.timeline-marker::after { background: rgba(167,135,91,.4); }
+.timeline-copy h3 { color: var(--blue); font: 400 1.35rem/1.25 var(--font-display); text-transform: none; }
+.timeline-copy p { margin-top: .3rem; color: #69594f; font: 400 .97rem/1.6 var(--font-body); }
+.travel-hero { min-height: clamp(290px,34vw,410px); }
+.travel-hero-copy { width: min(390px,100%); padding: 1.8rem 2rem; border: 1px solid #c5a879; background: var(--blue); }
+.travel-hero-copy .display-title { color: #f6ead3; font: 400 clamp(2.6rem,4.3vw,3.7rem)/1.08 var(--font-display); }
+.travel-hero-copy .lede { color: #eee0ca; font: 400 1rem/1.55 var(--font-body); }
+.venue-intro { scroll-margin-top: 100px; }
+.travel-card,.travel-card:nth-child(n) { background: transparent; border-top: 1px solid rgba(164,134,93,.3); box-shadow: none; }
+.travel-card h3 { color: var(--blue); font: 400 1.45rem/1.2 var(--font-display); text-transform: none; }
+.travel-card p { color: #67584e; font: 400 .96rem/1.6 var(--font-body); }
+.faq-layout { display: block; width: min(900px,100%); margin-inline: auto; }
+.faq-list { border-top: 1px solid #b99b70; }
+.faq-item { border-bottom: 1px solid rgba(164,134,93,.34); }
+.faq-item summary { padding: 1.05rem 3.2rem 1.05rem .15rem; color: var(--blue); font: 400 1.18rem/1.4 var(--font-display); }
+.faq-item summary::after { border: 1px solid #ac8d62; border-radius: 50%; background: transparent; color: var(--blue); }
+.faq-item[open] summary::after { background: var(--blue); color: #f8efe0; }
+.faq-answer { max-width: 790px; padding: 0 .4rem 1.1rem .15rem; color: #68584e; font: 400 .97rem/1.6 var(--font-body); }
+.faq-answer a { color: var(--blue); text-decoration-color: #b99b70; }
+.closing-band { display: none !important; }
+.site-footer { padding: 1.5rem 0; border-top: 1px solid rgba(164,134,93,.35); background: #f0e8db; color: var(--blue); }
+.footer-brand { color: var(--blue); font: 400 1.35rem/1.15 var(--font-display); text-transform: none; }
+.footer-inner p,.footer-links a { color: #78695d; font: 400 .85rem/1.45 var(--font-body); }
+.rsvp-paper .rsvp-error .kicker { display: none; }
+.rsvp-paper .rsvp-title { font: 400 clamp(2.6rem,5.6vw,4.3rem)/1.08 var(--font-display); text-transform: none; }
+.rsvp-paper .rsvp-content .kicker { display: none; }
+
+@media (max-width: 860px) {
+  .hero-invitation .hero-grid { grid-template-columns: minmax(0,1fr) minmax(290px,.9fr); gap: 1.3rem; }
+}
+@media (max-width: 640px) {
+  .hero-invitation { padding: 1.5rem 0 2rem; }
+  .hero-invitation .hero-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .hero-invitation .hero-copy { padding: 1.4rem 1.1rem; }
+  .hero-wordmark { max-width: 430px; }
+  .hero-art { width: min(100%,370px); }
+  .hero-invitation .button-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .hero-invitation .button-row .btn:first-child { grid-column: 1 / -1; }
+  .quick-grid { grid-template-columns: 1fr; gap: .8rem; }
+  .home-faqs .section-heading { display: block; }
+  .home-faq-more { text-align: left; }
+  .page-hero { padding: 2.4rem 0; }
+  .page-hero .display-title { font-size: clamp(2.5rem,11vw,3.7rem); }
+  .timeline-item { grid-template-columns: 74px 14px minmax(0,1fr); gap: .45rem; padding: .9rem 0; }
+  .timeline-time { font-size: .98rem; }
+  .timeline-copy h3 { font-size: 1.15rem; }
+  .timeline-copy p { font-size: .88rem; }
+  .travel-hero { min-height: 360px; align-items: end; justify-content: center; padding: 1rem; }
+  .travel-hero-copy { width: min(420px,100%); padding: 1.3rem 1.1rem; }
+  .venue-intro { grid-template-columns: 1fr; gap: 1rem; }
+  .faq-item summary { font-size: 1.05rem; }
+  .rsvp-shell { width: calc(100% - 1.5rem); }
+}

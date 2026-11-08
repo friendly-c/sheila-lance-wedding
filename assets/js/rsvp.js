@@ -73,7 +73,7 @@ async function initRsvp(pageRoot) {
         ? "That invitation link doesn't match an active invitation. Check the full link or contact the couple for help."
         : isMockMode
           ? "This page needs a personal invitation link. For this prototype, choose one of the sample invitations below."
-          : "This page needs your personal invitation link. Please open the unique link sent to you by the couple.";
+          : "This page needs your personal invitation link. Please open the unique link sent to you.";
     }
     return;
   }
